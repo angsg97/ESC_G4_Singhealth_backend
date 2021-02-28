@@ -1,21 +1,27 @@
-module.exports = app => {
-  const staff = require("../controllers/staff.controller.js");
+var express = require('express');
+var router = express.Router();
 
-  // Create a new Staff
-  app.post("/staff", staff.create);
+// Require controller module
+const staff_controller = require('../controllers/staff.controller');
 
-  // Retrieve all Staff
-  app.get("/staff", staff.findAll);
+/// STAFF ROUTES ///
 
-  // Retrieve a single Staff with staffId
-  app.get("/staff/:staffId", staff.findOne);
+// Create a new Staff
+router.post("/", staff_controller.create);
 
-  // Update a Staff with staffId
-  app.put("/staff/:staffId", staff.update);
+// Retrieve all Staff
+router.get("/", staff_controller.findAll);
 
-  // Delete a Staff with staffId
-  app.delete("/staff/:staffId", staff.delete);
+// Retrieve a single Staff with staffId
+router.get("/:staffId", staff_controller.findOne);
 
-  // Create a new Staff
-  app.delete("/staff", staff.deleteAll);
-};
+// Update a Staff with staffId
+router.put("/:staffId", staff_controller.update);
+
+// Delete a Staff with staffId
+router.delete("/:staffId", staff_controller.delete);
+
+// Create a new Staff
+router.delete("/", staff_controller.deleteAll);
+
+module.exports = router;
