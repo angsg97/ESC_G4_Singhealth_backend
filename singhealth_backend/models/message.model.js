@@ -15,32 +15,29 @@ const COLUMNS = [
 ];
 
 const Message = new QueryCollection({
-    name: "message"
+    name: TABLE,
+    name_id: ID,
+    columns: COLUMNS
 }, {
 
     create: {
         type: "post",
         path: "/",
-        query: `INSERT INTO ${TABLE} SET ?`,
-        param: (req) => {
-            return QueryCollection.filterColumns(COLUMNS, req.body);
-        },
-        resultReturn: (param, res, result) => {
-            result(null, {[ID]: res.insertId, ...param});
-
+        query: {
+            type: "insert_set_body",
+            param: [{body: null}],
+            result: ["insert_id", "body"]
         }
     },
-
 
     findAll: {
         type: "get",
         path: "/",
-        query: `SELECT * FROM ${TABLE}`,
-        param: (req) => {
-            return "";
-        },
-        resultReturn: (param, res, result) => {
-            result(null, res);
+        query: {
+            type: "select_all",
+            param: [{none: null}],
+            result: ["result_full"]
+
         }
     },
 
@@ -48,56 +45,20 @@ const Message = new QueryCollection({
     findById: {
         type: "get",
         path: `/:${ID}`,
-        query: `SELECT * FROM ${TABLE} WHERE ${ID} = ?`,
-        param: (req) => {
-            return req.params[ID];
-        },
-        resultReturn: (param, res, result) => {
-            //not found
-            if (!res.length) {
-                result({kind: "id_not_found"}, null);
-                return;
-            }
-            result(null, res[0]);
+        query: {
+            type: "select_from_param_id",
+            param: [{param_id: null}],
+            result: ["result_first"]
         }
     },
-
-    findByIssueId: {
-        type: "get",
-        path: `/?issue_id`,
-        query: `SELECT * FROM ${TABLE} WHERE issue_id = ?`,
-        param: (req) => {
-            return req.query.issue_id;
-        },
-        resultReturn: (param, res, result) => {
-            //not found
-            if (!res.length) {
-                result({
-                    kind: "id_not_found",
-                    type: "issue_id"
-                }, null);
-                return;
-            }
-            result(null, res[0]);
-        }
-    },
-
 
     updateById: {
         type: "put",
         path: `/:${ID}`,
-        query: `UPDATE ${TABLE} SET ? WHERE ${ID} = ?`,
-        param: (req) => {
-            return [QueryCollection.filterColumns(COLUMNS, req.body),
-                req.params[ID]];
-        },
-        resultReturn: (param, res, result) => {
-            //nothing changed
-            if (res.affectedRows == 0) {
-                result({ kind: "id_not_found" }, null);
-                return;
-            }
-            result(null, {[ID]: res.insertId, ...param[0]});
+        query: {
+            type: "update_from_param_id",
+            param: [{body: null},{param_id: null}],
+            result: ["param", "body"]
         }
     },
 
@@ -105,20 +66,12 @@ const Message = new QueryCollection({
     removeById: {
         type: "delete",
         path: `/:${ID}`,
-        query: `DELETE FROM ${TABLE} WHERE ${ID} = ?`,
-        param: (req) => {
-            return req.params[ID];
-        },
-        resultReturn: (param, res, result) => {
-            //nothing changed
-            if (res.affectedRows == 0) {
-                result({ kind: "id_not_found" }, null);
-                return;
-            }
-            result(null, `deleted ${ID} ${param} from ${TABLE}`);
+        query: {
+            type: "remove_from_param_id",
+            param: [{param_id: null}],
+            result: [{message: "successfully deleted"}, "param"]
         }
     }
-
 });
 
 module.exports = Message;

@@ -27,7 +27,8 @@ const Controller = function(model, queryType){
 
                     case "not_found":
                         res.status(404).send({
-                            message: `${err.type} ${req.params[err.type]} not found`
+                            message: `request with params not found`,
+                            ...err.type
                         });
                         break;
 
@@ -41,7 +42,7 @@ const Controller = function(model, queryType){
                     //misc errors
                     default:
                         res.status(500).send({
-                            message: `error on ${modelName} ${this.queryType}`
+                            message: `error on ${modelName} ${this.queryType}: ${err.message}`
                         });
                 }
             }
