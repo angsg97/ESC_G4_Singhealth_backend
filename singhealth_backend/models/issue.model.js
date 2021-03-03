@@ -51,25 +51,16 @@ const Issue = new QueryCollection({
     },
 
 
-    findByInstitution: {
+    findByAuditId: {
         type: "get",
-        path: `/institution/:institution`,
+        path: `/audit_id/:audit_id`,
         query: {
             type: "select_from_param_data",
-            param: [{param_data: "institution"}],
+            param: [{param_data: "audit_id"}],
             result: ["result_full"]
         }
     },
 
-    findByNameAndPhone: {
-        type: "get",
-        path: `/name/:name/phone/:phone`,
-        query: {
-            type: "select_from_param_data",
-            param: [{param_data: "name"}, {param_data: "phone"}],
-            result: ["result_full"]
-        }
-    },
 
     updateById: {
         type: "put",

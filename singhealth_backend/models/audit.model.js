@@ -49,26 +49,26 @@ const Audit = new QueryCollection({
         }
     },
 
-
-    findByInstitution: {
+    findByStaffId: {
         type: "get",
-        path: `/institution/:institution`,
+        path: `/staff_id/:staff_id`,
         query: {
             type: "select_from_param_data",
-            param: [{param_data: "institution"}],
+            param: [{param_data: "staff_id"}],
             result: ["result_full"]
         }
     },
 
-    findByNameAndPhone: {
+    findByTenantId: {
         type: "get",
-        path: `/name/:name/phone/:phone`,
+        path: `/tenant_id/:tenant_id`,
         query: {
             type: "select_from_param_data",
-            param: [{param_data: "name"}, {param_data: "phone"}],
+            param: [{param_data: "tenant_id"}],
             result: ["result_full"]
         }
     },
+
 
     updateById: {
         type: "put",

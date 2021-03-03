@@ -52,6 +52,17 @@ const Message = new QueryCollection({
         }
     },
 
+
+    findByIssueId: {
+        type: "get",
+        path: `/issue_id/:issue_id`,
+        query: {
+            type: "select_from_param_data",
+            param: [{param_data: "issue_id"}],
+            result: ["result_full"]
+        }
+    },
+
     updateById: {
         type: "put",
         path: `/:${ID}`,

@@ -61,16 +61,6 @@ const Tenant = new QueryCollection({
         }
     },
 
-    findByNameAndPhone: {
-        type: "get",
-        path: `/name/:name/phone/:phone`,
-        query: {
-            type: "select_from_param_data",
-            param: [{param_data: "name"}, {param_data: "phone"}],
-            result: ["result_full"]
-        }
-    },
-
     updateById: {
         type: "put",
         path: `/:${ID}`,
