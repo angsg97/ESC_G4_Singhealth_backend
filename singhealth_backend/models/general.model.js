@@ -14,7 +14,7 @@ const QueryCollection = function(data, routes){
 
     //the query map has a list of the queries as well as an array of
     //check that are run after the query result is recieved
-    const this.queryMap = {
+    this.queryMap = {
         insert_set_body: {
             query: `INSERT INTO ${this.name} SET ?`,
             check: []
@@ -49,7 +49,7 @@ const QueryCollection = function(data, routes){
 
     //the check map holds the names of the callback functions
     //for the check that are going to be run, referenced in the queryMap
-    const this.checkMap = {
+    this.checkMap = {
         param_id_not_found: (res, result, param) => {
             //not found
             if (!res.length) {
@@ -87,7 +87,7 @@ const QueryCollection = function(data, routes){
 
     //the param map holds the types of paramets that can be passed into
     //the query at the appropriate locations
-    const this.paramMap = {
+    this.paramMap = {
         none: (req, data) => {
             return "";
         },
@@ -107,7 +107,7 @@ const QueryCollection = function(data, routes){
 
     //the result map contains the available building blocks that
     //will be joined together in an object and returned as the result
-    const this.resultMap = {
+    this.resultMap = {
         result_full: (req, res) => {
             return res;
         },
