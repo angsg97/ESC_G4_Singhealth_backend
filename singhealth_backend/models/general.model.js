@@ -170,37 +170,6 @@ const QueryCollection = function(data, routes){
         //get the query model object
         let queryModel = this.routes[queryType].query;
 
-        console.log(queryModel);
-        console.log(this.queryMap);
-
-        //check if the type is insert or update
-        let isInsert = queryModel.type == "insert";
-        let isUpdate = queryModel.type == "update";
-
-        if(isInsert || isUpdate){
-
-            //check if all the columns of the body are defined
-            let missingColumns = [];
-
-            for(let i = 0; i<this.columns.length; i++){
-                var property = this.columns[i];
-
-                if(req.body[property] === undefined){
-                    missingColumns.push(property);
-                }
-
-            }
-
-            //if its not all filled, then we need to get the values first
-            if(missingColumns.length){
-                result({
-                    kind: "incomplete_body",
-                    missing: missingColumns
-                }, null);
-                return;
-            }
-
-        }
 
         if(!(queryModel.type in this.queryMap)){
             result({
@@ -230,10 +199,36 @@ const QueryCollection = function(data, routes){
             paramArrayData.push(paramData);
             paramArray.push(this.paramMap[paramName](req, paramData));
 
-
         }
 
-        console.log(queryString, paramArray);
+        //check if the type is insert or update
+        let isInsert = queryString.indexOf("INSERT") == 0;
+        let isUpdate = queryString.indexOf("UPDATE") == 0;
+
+        if(isInsert || isUpdate){
+
+            //check if all the columns of the body are defined
+            let missingColumns = [];
+
+            for(let i = 0; i<this.columns.length; i++){
+                var property = this.columns[i];
+
+                if(req.body[property] === undefined){
+                    missingColumns.push(property);
+                }
+
+            }
+
+            //if its not all filled, then we need to get the values first
+            if(missingColumns.length){
+                result({
+                    kind: "incomplete_body",
+                    missing: missingColumns
+                }, null);
+                return;
+            }
+
+        }
 
         //sql query with the model query and parameters
         sql.query(queryString, paramArray, (err, res) => {
