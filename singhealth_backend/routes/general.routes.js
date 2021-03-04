@@ -21,8 +21,10 @@ const Routes = function(modelName){
         let queryType = routes[i];
 
         //get the type and path of the route as defined in the model
-        let type = model.routes[queryType].type;
-        let path = model.routes[queryType].path;
+        let pathRaw = model.routes[queryType].path.split(" ");
+
+        let type = pathRaw[0].toLowerCase();
+        let path = pathRaw[1];
 
         //create a new controller for each route,
         //supplied with a model and the query type

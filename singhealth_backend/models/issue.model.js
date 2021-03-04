@@ -19,43 +19,36 @@ const Issue = new QueryCollection({
 }, {
 
     create: {
-        type: "post",
-        path: "/",
-        query: {
-            type: "insert_set_body",
-            param: [{body: null}],
-            result: ["insert_id", "body"]
-        }
+        path: "POST /",
+        query: "insert_set_body",
+        param: [{body: null}],
+        result: ["insert_id", "body"]
+
     },
 
     findAll: {
-        type: "get",
-        path: "/",
-        query: {
-            type: "select_all",
-            param: [{none: null}],
-            result: ["result_full"]
+        path: "GET /",
+        query: "select_all",
+        param: [{none: null}],
+        result: ["result_full"]
 
-        }
+
     },
 
 
     findById: {
-        type: "get",
-        path: `/:${ID}`,
-        query: {
-            type: "select_from_param_id",
-            param: [{param_id: null}],
-            result: ["result_first"]
-        }
+        path: `GET /:${ID}`,
+        query: "select_from_param_id",
+        param: [{param_id: null}],
+        result: ["result_first"]
+
     },
 
 
     findByAuditId: {
-        type: "get",
-        path: `/audit_id/:audit_id`,
+        path: `GET /audit_id/:audit_id`,
         query: {
-            type: "select_from_param_data",
+            query: "select_from_param_data",
             param: [{param_data: "audit_id"}],
             result: ["result_full"]
         }
@@ -63,24 +56,20 @@ const Issue = new QueryCollection({
 
 
     updateById: {
-        type: "put",
-        path: `/:${ID}`,
-        query: {
-            type: "update_from_param_id",
-            param: [{body: null},{param_id: null}],
-            result: ["param", "body"]
-        }
+        path: `PUT /:${ID}`,
+        query: "update_from_param_id",
+        param: [{body: null},{param_id: null}],
+        result: ["param", "body"]
+
     },
 
 
     removeById: {
-        type: "delete",
-        path: `/:${ID}`,
-        query: {
-            type: "remove_from_param_id",
-            param: [{param_id: null}],
-            result: [{message: "successfully deleted"}, "param"]
-        }
+        path: `DELETE /:${ID}`,
+        query: "remove_from_param_id",
+        param: [{param_id: null}],
+        result: [{message: "successfully deleted"}, "param"]
+
     }
 });
 

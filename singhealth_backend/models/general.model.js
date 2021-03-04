@@ -168,18 +168,18 @@ const QueryCollection = function(data, routes){
     this.query = (queryType, req, result) => {
 
         //get the query model object
-        let queryModel = this.routes[queryType].query;
+        let queryModel = this.routes[queryType];
 
 
-        if(!(queryModel.type in this.queryMap)){
+        if(!(queryModel.query in this.queryMap)){
             result({
-                message: `${queryModel.type} is not a valid query type`
+                message: `${queryModel.query} is not a valid query type`
             });
             return;
         }
 
-        let queryString = this.queryMap[queryModel.type].query;
-        let queryCheck = this.queryMap[queryModel.type].check
+        let queryString = this.queryMap[queryModel.query].query;
+        let queryCheck = this.queryMap[queryModel.query].check;
         let paramArray = [];
         let paramArrayData = [];
 
