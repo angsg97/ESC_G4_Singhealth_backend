@@ -18,14 +18,14 @@ const Tenant = new QueryCollection({
     columns: COLUMNS
 }, {
 
-    create: {
+    create_tenant: {
         path: "POST /",
         query: "insert_set_body",
         param: [{body: null}],
         result: ["insert_id", "body"]
     },
 
-    findAll: {
+    find_all_tenant: {
         path: "GET /",
         query: "select_all",
         param: [{none: null}],
@@ -34,7 +34,7 @@ const Tenant = new QueryCollection({
     },
 
 
-    findById: {
+    find_tenant_by_tenant_id: {
         path: `GET /:${ID}`,
         query: "select_from_param_id",
         param: [{param_id: null}],
@@ -43,7 +43,7 @@ const Tenant = new QueryCollection({
     },
 
 
-    findByInstitution: {
+    find_tenant_by_institution: {
         path: `GET /institution/:institution`,
         query: "select_from_param_data",
         param: [{param_data: "institution"}],
@@ -51,7 +51,7 @@ const Tenant = new QueryCollection({
 
     },
 
-    updateById: {
+    update_tenant_by_tenant_id: {
         path: `PUT /:${ID}`,
         query: "update_from_param_id",
         param: [{body: null},{param_id: null}],
@@ -60,7 +60,7 @@ const Tenant = new QueryCollection({
     },
 
 
-    removeById: {
+    remove_tenant_by_tenant_id: {
         path: `DELETE /:${ID}`,
         query: "remove_from_param_id",
         param: [{param_id: null}],

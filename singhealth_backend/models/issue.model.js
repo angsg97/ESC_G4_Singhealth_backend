@@ -18,7 +18,7 @@ const Issue = new QueryCollection({
     columns: COLUMNS
 }, {
 
-    create: {
+    create_issue: {
         path: "POST /",
         query: "insert_set_body",
         param: [{body: null}],
@@ -26,7 +26,7 @@ const Issue = new QueryCollection({
 
     },
 
-    findAll: {
+    find_all_issues: {
         path: "GET /",
         query: "select_all",
         param: [{none: null}],
@@ -36,7 +36,7 @@ const Issue = new QueryCollection({
     },
 
 
-    findById: {
+    find_issue_by_issue_id: {
         path: `GET /:${ID}`,
         query: "select_from_param_id",
         param: [{param_id: null}],
@@ -45,7 +45,7 @@ const Issue = new QueryCollection({
     },
 
 
-    findByAuditId: {
+    find_issue_by_audit_id: {
         path: `GET /audit_id/:audit_id`,
         query: {
             query: "select_from_param_data",
@@ -55,7 +55,7 @@ const Issue = new QueryCollection({
     },
 
 
-    updateById: {
+    update_issue_by_issue_id: {
         path: `PUT /:${ID}`,
         query: "update_from_param_id",
         param: [{body: null},{param_id: null}],
@@ -64,7 +64,7 @@ const Issue = new QueryCollection({
     },
 
 
-    removeById: {
+    remove_issue_by_issue_id: {
         path: `DELETE /:${ID}`,
         query: "remove_from_param_id",
         param: [{param_id: null}],

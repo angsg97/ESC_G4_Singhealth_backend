@@ -16,7 +16,7 @@ const Staff = new QueryCollection({
     columns: COLUMNS
 }, {
 
-    create: {
+    create_staff: {
         path: "POST /",
         query: "insert_set_body",
         param: [{body: null}],
@@ -24,7 +24,7 @@ const Staff = new QueryCollection({
 
     },
 
-    findAll: {
+    find_all_staff: {
         path: "GET /",
         query: "select_all",
         param: [{none: null}],
@@ -33,7 +33,7 @@ const Staff = new QueryCollection({
     },
 
 
-    findById: {
+    find_staff_by_staff_id: {
         path: `GET /:${ID}`,
         query: "select_from_param_id",
         param: [{param_id: null}],
@@ -42,7 +42,7 @@ const Staff = new QueryCollection({
     },
 
 
-    findByInstitution: {
+    find_staff_by_institution: {
         path: `GET /institution/:institution`,
         query: "select_from_param_data",
         param: [{param_data: "institution"}],
@@ -50,14 +50,14 @@ const Staff = new QueryCollection({
 
     },
 
-    findByNameAndPhone: {
+    find_staff_by_name_and_phone: {
         path: `GET /name/:name/phone/:phone`,
         query: "select_from_param_data",
         param: [{param_data: "name"}, {param_data: "phone"}],
         result: ["result_full"]
     },
 
-    updateById: {
+    update_staff_by_staff_id: {
         path: `PUT /:${ID}`,
         query: "update_from_param_id",
         param: [{body: null},{param_id: null}],
@@ -66,7 +66,7 @@ const Staff = new QueryCollection({
     },
 
 
-    removeById: {
+    remove_staff_by_staff_id: {
         path: `DELETE /:${ID}`,
         query: "remove_from_param_id",
         param: [{param_id: null}],

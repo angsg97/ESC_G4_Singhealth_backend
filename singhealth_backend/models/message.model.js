@@ -19,7 +19,7 @@ const Message = new QueryCollection({
     columns: COLUMNS
 }, {
 
-    create: {
+    create_message: {
         path: "POST /",
         query: "insert_set_body",
         param: [{body: null}],
@@ -27,7 +27,7 @@ const Message = new QueryCollection({
 
     },
 
-    findAll: {
+    find_all_messages: {
         path: "GET /",
         query: "select_all",
         param: [{none: null}],
@@ -37,7 +37,7 @@ const Message = new QueryCollection({
     },
 
 
-    findById: {
+    find_message_by_message_id: {
         path: `GET /:${ID}`,
         query: "select_from_param_id",
         param: [{param_id: null}],
@@ -46,7 +46,7 @@ const Message = new QueryCollection({
     },
 
 
-    findByIssueId: {
+    find_message_by_issue_id: {
         path: `GET /issue_id/:issue_id`,
         query: "select_from_param_data",
         param: [{param_data: "issue_id"}],
@@ -54,7 +54,7 @@ const Message = new QueryCollection({
 
     },
 
-    updateById: {
+    update_message_by_message_id: {
         path: `PUT /:${ID}`,
         query: "update_from_param_id",
         param: [{body: null},{param_id: null}],
@@ -63,7 +63,7 @@ const Message = new QueryCollection({
     },
 
 
-    removeById: {
+    remove_message_by_message_id: {
         path: `DELETE /:${ID}`,
         query: "remove_from_param_id",
         param: [{param_id: null}],

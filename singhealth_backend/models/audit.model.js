@@ -16,7 +16,7 @@ const Audit = new QueryCollection({
     columns: COLUMNS
 }, {
 
-    create: {
+    create_audit: {
         path: "POST /",
         query: "insert_set_body",
         param: [{body: null}],
@@ -24,7 +24,7 @@ const Audit = new QueryCollection({
 
     },
 
-    findAll: {
+    find_all_audits: {
         path: "GET /",
         query: "select_all",
         param: [{none: null}],
@@ -33,7 +33,7 @@ const Audit = new QueryCollection({
     },
 
 
-    findById: {
+    find_audit_by_audit_id: {
         path: `GET /:${ID}`,
         query: "select_from_param_id",
         param: [{param_id: null}],
@@ -41,7 +41,7 @@ const Audit = new QueryCollection({
 
     },
 
-    findByStaffId: {
+    find_audit_by_staff_id: {
         path: `GET /staff_id/:staff_id`,
         query: {
             query: "select_from_param_data",
@@ -50,7 +50,7 @@ const Audit = new QueryCollection({
         }
     },
 
-    findByTenantId: {
+    find_audit_by_tenant_id: {
         path: `GET /tenant_id/:tenant_id`,
         query: "select_from_param_data",
         param: [{param_data: "tenant_id"}],
@@ -59,7 +59,7 @@ const Audit = new QueryCollection({
     },
 
 
-    updateById: {
+    update_audit_by_audit_id: {
         path: `PUT /:${ID}`,
         query: "update_from_param_id",
         param: [{body: null},{param_id: null}],
@@ -68,7 +68,7 @@ const Audit = new QueryCollection({
     },
 
 
-    removeById: {
+    remove_audit_by_audit_id: {
         path: `DELETE /:${ID}`,
         query: "remove_from_param_id",
         param: [{param_id: null}],
