@@ -8,8 +8,7 @@ const COLUMNS = [
     "email",
     "institution",
     "fnb",
-    "floor",
-    "unit"
+    "unit",
 ];
 
 const Tenant = new QueryCollection({

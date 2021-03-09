@@ -6,7 +6,7 @@ const COLUMNS = [
     "name",
     "phone",
     "email",
-    "institution"
+    "institution",
 ];
 
 

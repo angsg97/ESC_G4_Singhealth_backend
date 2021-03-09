@@ -3,13 +3,11 @@ const QueryCollection = require("./general.model.js");
 const TABLE = "issue";
 const ID = `${TABLE}_id`;
 const COLUMNS = [
+    "audit_id",
     "category",
     "description",
-    "resolved",
     "duedate",
-    "initialPhoto",
-    "responsePhoto",
-    "audit_id"
+    "resolved",
 ];
 
 const Issue = new QueryCollection({

@@ -3,15 +3,19 @@ const QueryCollection = require("./general.model.js");
 const TABLE = "message";
 const ID = `${TABLE}_id`;
 const COLUMNS = [
-    "tag",
+    "issue_id",
     "staff_id",
     "tenant_id",
-    "issue_id",
-    "fromAuditor",
     "time",
+    "from_staff",
+    "tag",
+    "info",
     "body",
-    "info"
+    "photo",
+
 ];
+
+//find message after certain time
 
 const Message = new QueryCollection({
     name: TABLE,
