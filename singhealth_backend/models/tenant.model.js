@@ -2,14 +2,27 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "tenant";
 const ID = `${TABLE}_id`;
-const COLUMNS = [
-    "name",
-    "phone",
-    "email",
-    "institution",
-    "fnb",
-    "unit",
-];
+const COLUMNS = {
+    name: {
+        required: true
+    },
+    phone: {
+        required: true
+    },
+    email: {
+        required: true
+    },
+    institution: {
+        required: true
+    },
+    fnb: {
+        required: false,
+        default: false
+    },
+    unit: {
+        required: true
+    }
+};
 
 const Tenant = new QueryCollection({
     name: TABLE,

@@ -180,26 +180,7 @@ const QueryCollection = function(data, routes){
 
         let queryString = this.queryMap[queryModel.query].query;
         let queryCheck = this.queryMap[queryModel.query].check;
-        let paramArray = [];
-        let paramArrayData = [];
 
-        for(var i = 0; i<queryModel.param.length; i++){
-
-            let param = queryModel.param[i];
-            let paramName = Object.keys(param)[0];
-            let paramData = param[paramName];
-
-            if(!(paramName in this.paramMap)){
-                result({
-                    message: `${paramName} is not a valid param type`
-                });
-                return;
-            }
-
-            paramArrayData.push(paramData);
-            paramArray.push(this.paramMap[paramName](req, paramData));
-
-        }
 
         //check if the type is insert or update
         let isInsert = queryString.indexOf("INSERT") == 0;
@@ -210,11 +191,17 @@ const QueryCollection = function(data, routes){
             //check if all the columns of the body are defined
             let missingColumns = [];
 
-            for(let i = 0; i<this.columns.length; i++){
-                var property = this.columns[i];
+            for(let property in this.columns){
 
                 if(req.body[property] === undefined){
-                    missingColumns.push(property);
+
+                    if(this.columns[property].required){
+                        missingColumns.push(property);
+                    }
+                    else{
+                        req.body[property] = this.columns[property].default;
+                    }
+
                 }
 
             }
@@ -230,6 +217,27 @@ const QueryCollection = function(data, routes){
 
         }
 
+        let paramArray = [];
+        let paramArrayData = [];
+
+        for(var i = 0; i<queryModel.param.length; i++){
+
+            let param = queryModel.param[i];
+            let paramName = Object.keys(param)[0];
+            let paramData = param[paramName];
+            if(!(paramName in this.paramMap)){
+                result({
+                    message: `${paramName} is not a valid param type`
+                });
+                return;
+            }
+
+            paramArrayData.push(paramData);
+            paramArray.push(this.paramMap[paramName](req, paramData));
+
+        }
+
+        console.log(queryString, paramArray);
         //sql query with the model query and parameters
         sql.query(queryString, paramArray, (err, res) => {
 
@@ -298,8 +306,7 @@ const QueryCollection = function(data, routes){
 
 QueryCollection.filterColumns = (columns, obj) =>{
     let returnObject = {}
-    for(var i = 0; i<columns.length; i++){
-        let property = columns[i];
+    for(let property in columns){
         returnObject[property] = obj[property];
     }
     return returnObject;

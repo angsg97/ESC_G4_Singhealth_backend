@@ -2,13 +2,24 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "issue";
 const ID = `${TABLE}_id`;
-const COLUMNS = [
-    "audit_id",
-    "category",
-    "description",
-    "duedate",
-    "resolved",
-];
+const COLUMNS = {
+    audit_id: {
+        required: true
+    },
+    category: {
+        required: true
+    },
+    description: {
+        required: true
+    },
+    duedate: {
+        required: true
+    },
+    resolved: {
+        required: false,
+        default: false
+    }
+}
 
 const Issue = new QueryCollection({
     name: TABLE,

@@ -2,18 +2,42 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "message";
 const ID = `${TABLE}_id`;
-const COLUMNS = [
-    "issue_id",
-    "staff_id",
-    "tenant_id",
-    "time",
-    "from_staff",
-    "tag",
-    "info",
-    "body",
-    "photo",
+const COLUMNS = {
+    issue_id: {
+        required: true
+    },
+    staff_id: {
+        required: true
+    },
+    tenant_id: {
+        required: true
+    },
+    time: {
+        required: false,
+        default: Date.now().toString()
+    },
+    from_staff: {
+        required: false,
+        default: false
+    },
+    tag: {
+        required: false,
+        default: ""
+    },
+    info: {
+        required: false,
+        default: ""
+    },
+    body: {
+        required: false,
+        default: ""
+    },
+    photo: {
+        required: false,
+        default: null
+    }
 
-];
+};
 
 //find message after certain time
 
