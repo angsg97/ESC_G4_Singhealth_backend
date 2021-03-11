@@ -55,3 +55,14 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+//firebase stuff???
+
+
+var firebase = require('firebase');
+require('firebase/storage');
+var firebaseConfig = require('./config/firebase.config');
+var fbapp = firebase.initializeApp(firebaseConfig);
+
+var storage = firebase.storage();
