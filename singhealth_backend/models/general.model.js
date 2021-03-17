@@ -35,6 +35,16 @@ const QueryCollection = function(data, routes){
             check: ["param_data_not_found"]
         },
 
+        select_from_data_param_greater_than: {
+            query: `SELECT * FROM ${this.name} WHERE ?? > ?`,
+            check: ["param_data_not_found"]
+        },
+
+        select_from_data_param_lesser_than: {
+            query: `SELECT * FROM ${this.name} WHERE ?? < ?`,
+            check: ["param_data_not_found"]
+        },
+
         update_from_param_id: {
             query: `UPDATE ${this.name} SET ? WHERE ${this.name_id} = ?`,
             check: ["no_change"]
@@ -92,6 +102,10 @@ const QueryCollection = function(data, routes){
             return "";
         },
 
+        data: (req, data) => {
+            return data;
+        },
+
         body: (req, data) => {
             return QueryCollection.filterColumns(this.columns, req.body);
         },
@@ -102,6 +116,14 @@ const QueryCollection = function(data, routes){
 
         param_data: (req, data) => {
             return {[data]: req.params[data]};
+        },
+
+        param_value: (req, data) => {
+            return req.params[data];
+        },
+
+        param_value_parse_int: (req, data) => {
+            return parseInt(req.params[data]);
         }
     }
 
@@ -203,7 +225,7 @@ const QueryCollection = function(data, routes){
                         if(def === "Date.now()"){
                             def = Date.now();
                         }
-                        
+
                         req.body[property] = def;
                     }
 

@@ -79,7 +79,14 @@ const Message = new QueryCollection({
         query: "select_from_param_data",
         param: [{param_data: "issue_id"}],
         result: ["result_full"]
+    },
 
+
+    find_message_by_greater_than_time: {
+        path: `GET /time/:time`,
+        query: "select_from_data_param_greater_than",
+        param: [{data: "time"}, {param_value_parse_int: "time"}],
+        result: ["result_full"]
     },
 
     update_message_by_message_id: {

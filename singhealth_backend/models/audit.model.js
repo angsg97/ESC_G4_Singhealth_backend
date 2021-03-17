@@ -71,6 +71,14 @@ const Audit = new QueryCollection({
 
     },
 
+    find_audit_by_greater_than_time: {
+        path: `GET /time/:time`,
+        query: "select_from_data_param_greater_than",
+        param: [{data: "time"}, {param_data: "time"}],
+        result: ["result_full"]
+
+    },
+
 
     update_audit_by_audit_id: {
         path: `PUT /:${ID}`,
