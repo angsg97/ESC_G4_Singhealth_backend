@@ -8,4 +8,6 @@ module.exports = (app) => {
 	app.use(`/api/audit`, new Routes("audit").router);
 	app.use(`/api/issue`, new Routes("issue").router);
 	app.use(`/api/message`, new Routes("message").router);
+
+	app.use(`/api/image`, require("../routes/image.routes"));
 };

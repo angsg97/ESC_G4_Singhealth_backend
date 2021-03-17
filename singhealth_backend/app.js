@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
+var fileUpload = require('express-fileupload');
 
 var app = express();
 
@@ -16,6 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// parse requests of content-type: file
+app.use(fileUpload());
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -55,14 +59,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-
-//firebase stuff???
-
-
-var firebase = require('firebase');
-require('firebase/storage');
-var firebaseConfig = require('./config/firebase.config');
-var fbapp = firebase.initializeApp(firebaseConfig);
-
-var storage = firebase.storage();
