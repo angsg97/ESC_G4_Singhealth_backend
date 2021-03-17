@@ -12,7 +12,7 @@ const COLUMNS = {
     },
     time: {
         required: false,
-        default: Date.now()
+        default: "Date.now()"
     },
     score: {
         required: true

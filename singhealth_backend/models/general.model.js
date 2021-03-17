@@ -199,7 +199,12 @@ const QueryCollection = function(data, routes){
                         missingColumns.push(property);
                     }
                     else{
-                        req.body[property] = this.columns[property].default;
+                        var def = this.columns[property].default;
+                        if(def === "Date.now()"){
+                            def = Date.now();
+                        }
+                        
+                        req.body[property] = def;
                     }
 
                 }
