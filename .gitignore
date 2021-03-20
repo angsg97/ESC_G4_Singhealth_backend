@@ -1,5 +1,5 @@
-# config file
-singhealth_backend/config/db.config.js
+# config files
+singhealth_backend/config/
 
 # Logs
 logs
@@ -107,4 +107,3 @@ dist
 .tern-port
 singhealthdb.postman_collection.json
 singhealthdb.postman_collection_v2.1.json
-singhealth_backend/.DS_Store
