@@ -10,6 +10,8 @@ var cors = require("cors");
 var session = require("express-session");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+var logger = require('morgan');
+var fileUpload = require('express-fileupload');
 
 var mongoose = require("mongoose");
 var dbConfig = require("./config/db.config.js");
@@ -46,6 +48,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// parse requests of content-type: file
+app.use(fileUpload());
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());

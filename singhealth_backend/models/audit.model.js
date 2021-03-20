@@ -2,7 +2,26 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "audit";
 const ID = `${TABLE}_id`;
-const COLUMNS = ["staff_id", "tenant_id", "time", "score", "fnb"];
+const COLUMNS = {
+
+    staff_id: {
+        required: true
+    },
+    tenant_id: {
+        required: true
+    },
+    time: {
+        required: false,
+        default: "Date.now()"
+    },
+    score: {
+        required: true
+    },
+    fnb: {
+        required: false,
+        default: false
+    }
+};
 
 const Audit = new QueryCollection(
   {
@@ -47,6 +66,15 @@ const Audit = new QueryCollection(
       param: [{ param_data: "tenant_id" }],
       result: ["result_full"],
     },
+
+    find_audit_by_greater_than_time: {
+        path: `GET /time/:time`,
+        query: "select_from_data_param_greater_than",
+        param: [{data: "time"}, {param_data: "time"}],
+        result: ["result_full"]
+
+    },
+
 
     update_audit_by_audit_id: {
       path: `PUT /:${ID}`,

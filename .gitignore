@@ -107,3 +107,4 @@ dist
 .tern-port
 singhealthdb.postman_collection.json
 singhealthdb.postman_collection_v2.1.json
+singhealth_backend/.DS_Store

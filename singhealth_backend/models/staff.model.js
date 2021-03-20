@@ -2,7 +2,20 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "staff";
 const ID = `${TABLE}_id`;
-const COLUMNS = ["name", "phone", "email", "institution"];
+const COLUMNS = {
+    name: {
+        required: true,
+    },
+    phone: {
+        required: true
+    },
+    email: {
+        required: true
+    },
+    institution: {
+        required: true
+    }
+};
 
 const Staff = new QueryCollection(
   {
@@ -12,10 +25,11 @@ const Staff = new QueryCollection(
   },
   {
     create_staff: {
-      path: "POST /",
-      query: "insert_set_body",
-      param: [{ body: null }],
-      result: ["insert_id", "body"],
+        path: "POST /",
+        query: "insert_set_body",
+        param: [{body: null}],
+        result: ["insert_id", "body"],
+
     },
 
     find_all_staff: {

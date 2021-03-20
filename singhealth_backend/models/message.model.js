@@ -2,16 +2,44 @@ const QueryCollection = require("./general.model.js");
 
 const TABLE = "message";
 const ID = `${TABLE}_id`;
-const COLUMNS = [
-  "tag",
-  "staff_id",
-  "tenant_id",
-  "issue_id",
-  "fromAuditor",
-  "time",
-  "body",
-  "info",
-];
+const COLUMNS = {
+    issue_id: {
+        required: true
+    },
+    staff_id: {
+        required: true
+    },
+    tenant_id: {
+        required: true
+    },
+    time: {
+        required: false,
+        default: "Date.now()"
+    },
+    from_staff: {
+        required: false,
+        default: false
+    },
+    tag: {
+        required: false,
+        default: ""
+    },
+    info: {
+        required: false,
+        default: ""
+    },
+    body: {
+        required: false,
+        default: ""
+    },
+    photo: {
+        required: false,
+        default: null
+    }
+
+};
+
+//find message after certain time
 
 const Message = new QueryCollection(
   {
@@ -42,10 +70,18 @@ const Message = new QueryCollection(
     },
 
     find_message_by_issue_id: {
-      path: `GET /issue_id/:issue_id`,
-      query: "select_from_param_data",
-      param: [{ param_data: "issue_id" }],
-      result: ["result_full"],
+        path: `GET /issue_id/:issue_id`,
+        query: "select_from_param_data",
+        param: [{param_data: "issue_id"}],
+        result: ["result_full"]
+    },
+
+
+    find_message_by_greater_than_time: {
+        path: `GET /time/:time`,
+        query: "select_from_data_param_greater_than",
+        param: [{data: "time"}, {param_value_parse_int: "time"}],
+        result: ["result_full"]
     },
 
     update_message_by_message_id: {
