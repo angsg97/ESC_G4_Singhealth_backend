@@ -2,7 +2,6 @@
 const Routes = require("../routes/general.routes");
 
 //create new routes for each of the path
-<<<<<<< HEAD
 module.exports = (app, passport) => {
   app.use(
     `/api/staff`,
@@ -29,14 +28,9 @@ module.exports = (app, passport) => {
     passport.authenticate("jwt", { session: false }),
     new Routes("message").router
   );
-=======
-module.exports = (app) => {
-	app.use(`/api/staff`, new Routes("staff").router);
-	app.use(`/api/tenant`, new Routes("tenant").router);
-	app.use(`/api/audit`, new Routes("audit").router);
-	app.use(`/api/issue`, new Routes("issue").router);
-	app.use(`/api/message`, new Routes("message").router);
-
-	app.use(`/api/image`, require("../routes/image.routes"));
->>>>>>> origin/jonbackend
+  app.use(
+    `/api/image`,
+    passport.authenticate("jwt", { session: false }),
+    require("../routes/image.routes")
+  );
 };
