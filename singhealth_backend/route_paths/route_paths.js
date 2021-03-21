@@ -3,39 +3,41 @@ const Routes = require("../routes/general.routes");
 
 //create new routes for each of the path
 module.exports = (app, passport) => {
+  var authentication = passport.authenticate("jwt", { session: false });
+
   app.use(
     `/api/staff`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     new Routes("staff").router
   );
   app.use(
     `/api/tenant`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     new Routes("tenant").router
   );
   app.use(
     `/api/audit`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     new Routes("audit").router
   );
   app.use(
     `/api/issue`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     new Routes("issue").router
   );
   app.use(
     `/api/message`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     new Routes("message").router
   );
   app.use(
     `/api/image`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     require("../routes/image.routes")
   );
   app.use(
     `/api/email`,
-    passport.authenticate("jwt", { session: false }),
+    authentication,
     require("../routes/email.routes")
   );
 };
