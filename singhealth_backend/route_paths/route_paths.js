@@ -33,4 +33,9 @@ module.exports = (app, passport) => {
     passport.authenticate("jwt", { session: false }),
     require("../routes/image.routes")
   );
+  app.use(
+    `/api/email`,
+    passport.authenticate("jwt", { session: false }),
+    require("../routes/email.routes")
+  );
 };
