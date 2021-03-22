@@ -30,6 +30,16 @@ module.exports = (model) => {
             check: ["param_data_not_found"]
         },
 
+        select_from_data_param_greater_than_and_param_data: {
+            query: `SELECT * FROM ${model.name} WHERE ?? > ? and ?`,
+            check: ["param_data_not_found"]
+        },
+
+        select_from_data_param_lesser_than_and_param_data: {
+            query: `SELECT * FROM ${model.name} WHERE ?? < ? and ?`,
+            check: ["param_data_not_found"]
+        },
+
         update_from_param_id: {
             query: `UPDATE ${model.name} SET ? WHERE ${model.name_id} = ?`,
             check: ["no_change"]

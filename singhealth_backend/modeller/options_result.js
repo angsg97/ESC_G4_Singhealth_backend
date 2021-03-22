@@ -17,7 +17,7 @@ module.exports = (model) => {
         },
 
         insert_id: (req, res) => {
-            return {[this.name_id]: res.insertId};
+            return {[model.name_id]: res.insertId};
         }
 
     }

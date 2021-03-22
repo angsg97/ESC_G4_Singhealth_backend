@@ -9,11 +9,11 @@ module.exports = (model) => {
         },
 
         body: (req, data) => {
-            return QueryCollection.filterColumns(this.columns, req.body);
+            return QueryCollection.filterColumns(model.columns, req.body);
         },
 
         param_id: (req, data) => {
-            return req.params[this.name_id];
+            return req.params[model.name_id];
         },
 
         param_data: (req, data) => {

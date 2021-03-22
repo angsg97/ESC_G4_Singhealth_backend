@@ -1,5 +1,7 @@
 //require a connection to the database
-const sql = require("./db.js");
+const db = require("./db.js");
+const mysql = db.mysql;
+const connection = db.connection;
 
 //the query collection holds the information for all the routes in the model
 const QueryCollection = function(data, routes){
@@ -132,8 +134,9 @@ const QueryCollection = function(data, routes){
         }
 
         console.log(queryString, paramArray);
+        console.log(mysql.format(queryString, paramArray));
         //sql query with the model query and parameters
-        sql.query(queryString, paramArray, (err, res) => {
+        connection.query(queryString, paramArray, (err, res) => {
 
             //error
             if(err){
@@ -193,7 +196,10 @@ const QueryCollection = function(data, routes){
 
         });
 
+
     };
+
+
 
 }
 
