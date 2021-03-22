@@ -12,7 +12,7 @@ const COLUMNS = {
     description: {
         required: true
     },
-    duedate: {
+    due_date: {
         required: true
     },
     resolved: {
