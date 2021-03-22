@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 
 var createError = require("http-errors");
 var express = require("express");
@@ -70,10 +70,10 @@ app.use("/", require("./routes/auth_route"));
 require(`./route_paths/route_paths`)(app, passport);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
