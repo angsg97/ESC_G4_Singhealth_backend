@@ -1,4 +1,4 @@
-const QueryCollection = require("./general.model.js");
+const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "audit";
 const ID = `${TABLE}_id`;
