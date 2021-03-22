@@ -32,9 +32,9 @@ const COLUMNS = {
         required: false,
         default: ""
     },
-    photo: {
+    image: {
         required: false,
-        default: null
+        default: ""
     }
 
 };

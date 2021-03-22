@@ -21,6 +21,17 @@ const COLUMNS = {
     },
     unit: {
         required: true
+    },
+    image_logo: {
+        required: false,
+        default: ""
+    },
+    image_location: {
+        required: false,
+        default: ""
+    },
+    contract_date: {
+        required: true
     }
 };
 
