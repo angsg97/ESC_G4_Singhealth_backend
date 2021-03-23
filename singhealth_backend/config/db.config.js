@@ -3,5 +3,4 @@ module.exports = {
     PASSWORD: process.env.DATABASE_PASSWORD,
     HOST: process.env.DATABASE_HOST,
     DB: process.env.DATABASE_DB,
-    MONGODB_URI: process.env.MONGODB_URI
 }

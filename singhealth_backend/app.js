@@ -17,7 +17,6 @@ var logger = require("morgan");
 var fileUpload = require("express-fileupload");
 
 var mongoose = require("mongoose");
-var dbConfig = require("./config/db.config.js");
 
 // Set up MongoDB using credentials
 
