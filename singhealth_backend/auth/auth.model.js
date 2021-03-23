@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
-const UserSchema = new Schema({
+const TenantSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -11,11 +11,31 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },
+  }
 });
 
+const AdminSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  }
+})
+
+// method to compare user passwords
+const isValidPassword = async function(password) {
+  const user = this;
+  const compare = await bcrypt.compare(password, user.password);
+
+  return compare;
+}
+
 // Pre-Hook to convert plain-text password to hash before storage
-UserSchema.pre("save", async function(next) {
+const hash_password = async function(next) {
   const user = this;
   if (this.password === undefined) {
     next(new Error('Password field is empty'));
@@ -28,15 +48,15 @@ UserSchema.pre("save", async function(next) {
   } catch (err) {
     next(err);
   }
-});
+}
 
-UserSchema.methods.isValidPassword = async function(password) {
-  const user = this;
-  const compare = await bcrypt.compare(password, user.password);
+AdminSchema.pre("save", hash_password);
+AdminSchema.methods.isValidPassword = isValidPassword;
 
-  return compare;
-};
+TenantSchema.pre("save", hash_password);
+TenantSchema.methods.isValidPassword = isValidPassword;
 
-const UserModel = mongoose.model("user", UserSchema);
+const TenantModel = mongoose.model("tenant", TenantSchema);
+const AdminModel = mongoose.model("admin", AdminSchema);
 
-module.exports = UserModel;
+module.exports = {TenantModel, AdminModel};

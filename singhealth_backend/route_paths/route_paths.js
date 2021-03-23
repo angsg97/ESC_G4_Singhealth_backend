@@ -10,7 +10,7 @@ module.exports = (app, passport) => {
   );
   app.use(
     `/api/tenant`,
-    passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt_admin", { session: false }),
     new Routes("tenant").router
   );
   app.use(

@@ -9,15 +9,13 @@ var logger = require("morgan");
 var cors = require("cors");
 var session = require("express-session");
 var passport = require("passport");
-var LocalStrategy = require("passport-local").Strategy;
-var logger = require('morgan');
-var fileUpload = require('express-fileupload');
+var logger = require("morgan");
+var fileUpload = require("express-fileupload");
 
 var mongoose = require("mongoose");
 var dbConfig = require("./config/db.config.js");
 
 // Set up MongoDB using credentials
-const UserModel = require("./auth/auth.model");
 
 mongoose.connect(
   dbConfig.MONGODB_URI,
@@ -88,7 +86,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({error:err});
+  res.json({ error: err });
 });
 
 module.exports = app;

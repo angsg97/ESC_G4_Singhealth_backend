@@ -9,7 +9,18 @@ router.post(
   passport.authenticate("signup", { session: false }),
   async (req, res, next) => {
     res.json({
-      message: "Signup successful",
+      message: "User Signup successful",
+      user: req.user,
+    });
+  }
+);
+
+router.post(
+  "/admin_signup",
+  passport.authenticate("admin_signup", { session: false }),
+  async (req, res, next) => {
+    res.json({
+      message: "Admin User Signup successful",
       user: req.user,
     });
   }
@@ -27,10 +38,18 @@ router.post("/login", async (req, res, next) => {
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
 
-        const body = { _id: user._id, email: user.email };
-        const token = jwt.sign({ user: body }, "TOP_SECRET");
+        console.log(info.message);
 
-        return res.json({ token });
+        const body = { _id: user._id, email: user.email };
+        const token = jwt.sign(
+          {
+            user: body,
+            isAdmin: info.isAdmin,
+          },
+          process.env.JWT_SECRET_KEY
+        );
+
+        return res.json({ token, isAdmin: info.isAdmin });
       });
     } catch (error) {
       return next(error);
