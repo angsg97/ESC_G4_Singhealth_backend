@@ -105,5 +105,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Postman collection files
 singhealthdb.postman_collection.json
 singhealthdb.postman_collection_v2.1.json
+
+# Ignore all .DS_Store files
+**/.DS_Store
