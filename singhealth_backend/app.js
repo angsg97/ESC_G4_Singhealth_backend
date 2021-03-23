@@ -1,5 +1,9 @@
 // require("dotenv").config();
 
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+}
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -20,7 +24,7 @@ var dbConfig = require("./config/db.config.js");
 const UserModel = require("./auth/auth.model");
 
 mongoose.connect(
-  dbConfig.MONGODB_URI,
+  process.env.MONGODB_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
