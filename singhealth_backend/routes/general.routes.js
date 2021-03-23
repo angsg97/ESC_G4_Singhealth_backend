@@ -25,9 +25,11 @@ const Routes = function(modelName){
 
         let type = pathRaw[0].toLowerCase();
         let path = pathRaw[1];
-
         //create a new controller for each route,
         //supplied with a model and the query type
+        if(path[0]!="/"){
+            console.log(`missing / in path ${type}`);
+        }
         this.router[type](path, new Controller(model, queryType));
 
     }

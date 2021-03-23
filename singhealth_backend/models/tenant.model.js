@@ -1,4 +1,4 @@
-const QueryCollection = require("./general.model.js");
+const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "tenant";
 const ID = `${TABLE}_id`;
@@ -20,6 +20,17 @@ const COLUMNS = {
         default: false
     },
     unit: {
+        required: true
+    },
+    image_logo: {
+        required: false,
+        default: ""
+    },
+    image_location: {
+        required: false,
+        default: ""
+    },
+    contract_date: {
         required: true
     }
 };

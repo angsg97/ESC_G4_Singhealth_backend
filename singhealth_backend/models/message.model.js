@@ -1,4 +1,4 @@
-const QueryCollection = require("./general.model.js");
+const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "message";
 const ID = `${TABLE}_id`;
@@ -32,9 +32,9 @@ const COLUMNS = {
         required: false,
         default: ""
     },
-    photo: {
+    image: {
         required: false,
-        default: null
+        default: ""
     }
 
 };
@@ -76,11 +76,10 @@ const Message = new QueryCollection(
         result: ["result_full"]
     },
 
-
-    find_message_by_greater_than_time: {
-        path: `GET /time/:time`,
-        query: "select_from_data_param_greater_than",
-        param: [{data: "time"}, {param_value_parse_int: "time"}],
+    find_message_by_issue_and_greater_than_time: {
+        path: `GET /issue_id_time/:issue_id/:time`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {param_value_parse_int: "time"}, {param_data: "issue_id"}],
         result: ["result_full"]
     },
 

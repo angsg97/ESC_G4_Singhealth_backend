@@ -1,4 +1,4 @@
-const QueryCollection = require("./general.model.js");
+const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "issue";
 const ID = `${TABLE}_id`;
@@ -12,7 +12,7 @@ const COLUMNS = {
     description: {
         required: true
     },
-    duedate: {
+    due_date: {
         required: true
     },
     resolved: {

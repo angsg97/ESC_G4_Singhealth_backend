@@ -1,5 +1,7 @@
 //require a connection to the database
-const sql = require("./db.js");
+const db = require("./db.js");
+const mysql = db.mysql;
+const connection = db.connection;
 
 //the query collection holds the information for all the routes in the model
 const QueryCollection = function(data, routes){
@@ -14,143 +16,18 @@ const QueryCollection = function(data, routes){
 
     //the query map has a list of the queries as well as an array of
     //check that are run after the query result is recieved
-    this.queryMap = {
-        insert_set_body: {
-            query: `INSERT INTO ${this.name} SET ?`,
-            check: []
-        },
-
-        select_all: {
-            query: `SELECT * FROM ${this.name}`,
-            check: []
-        },
-
-        select_from_param_id: {
-            query: `SELECT * FROM ${this.name} WHERE ${this.name_id} = ?`,
-            check: ["param_id_not_found"]
-        },
-
-        select_from_param_data: {
-            query: `SELECT * FROM ${this.name} WHERE ?`,
-            check: ["param_data_not_found"]
-        },
-
-        select_from_data_param_greater_than: {
-            query: `SELECT * FROM ${this.name} WHERE ?? > ?`,
-            check: ["param_data_not_found"]
-        },
-
-        select_from_data_param_lesser_than: {
-            query: `SELECT * FROM ${this.name} WHERE ?? < ?`,
-            check: ["param_data_not_found"]
-        },
-
-        update_from_param_id: {
-            query: `UPDATE ${this.name} SET ? WHERE ${this.name_id} = ?`,
-            check: ["no_change"]
-        },
-
-        remove_from_param_id: {
-            query: `DELETE FROM ${this.name} WHERE ${this.name_id} = ?`,
-            check: ["no_change"]
-        }
-
-    }
-
+    this.queryMap = require("./options_query.js")(data);
     //the check map holds the names of the callback functions
     //for the check that are going to be run, referenced in the queryMap
-    this.checkMap = {
-        param_id_not_found: (res, result, param) => {
-            //not found
-            if (!res.length) {
-                result({
-                    kind: "id_not_found"
-                }, null);
-                return false;
-            }
-            return true;
-        },
-
-        param_data_not_found: (res, result, param) => {
-            //not found
-            if (!res.length) {
-                result({
-                    kind: "not_found",
-                    type: param
-                }, null);
-                return false;
-            }
-            return true;
-        },
-
-        no_change: (res, result, param) => {
-            if (res.affectedRows == 0) {
-                result({
-                    kind: "not_found",
-                    type: param
-                }, null);
-                return false;
-            }
-            return true;
-        }
-    }
+    this.checkMap = require("./options_check.js")(data);
 
     //the param map holds the types of paramets that can be passed into
     //the query at the appropriate locations
-    this.paramMap = {
-        none: (req, data) => {
-            return "";
-        },
-
-        data: (req, data) => {
-            return data;
-        },
-
-        body: (req, data) => {
-            return QueryCollection.filterColumns(this.columns, req.body);
-        },
-
-        param_id: (req, data) => {
-            return req.params[this.name_id];
-        },
-
-        param_data: (req, data) => {
-            return {[data]: req.params[data]};
-        },
-
-        param_value: (req, data) => {
-            return req.params[data];
-        },
-
-        param_value_parse_int: (req, data) => {
-            return parseInt(req.params[data]);
-        }
-    }
+    this.paramMap = require("./options_param.js")(data);
 
     //the result map contains the available building blocks that
     //will be joined together in an object and returned as the result
-    this.resultMap = {
-        result_full: (req, res) => {
-            return res;
-        },
-
-        result_first: (req, res) => {
-            return res[0];
-        },
-
-        param: (req, res) => {
-            return req.params;
-        },
-
-        body: (req, res) => {
-            return req.body;
-        },
-
-        insert_id: (req, res) => {
-            return {[this.name_id]: res.insertId};
-        }
-
-    }
+    this.resultMap = require("./options_result.js")(data);
 
 
 
@@ -257,8 +134,9 @@ const QueryCollection = function(data, routes){
         }
 
         console.log(queryString, paramArray);
+        console.log(mysql.format(queryString, paramArray));
         //sql query with the model query and parameters
-        sql.query(queryString, paramArray, (err, res) => {
+        connection.query(queryString, paramArray, (err, res) => {
 
             //error
             if(err){
@@ -318,7 +196,10 @@ const QueryCollection = function(data, routes){
 
         });
 
+
     };
+
+
 
 }
 

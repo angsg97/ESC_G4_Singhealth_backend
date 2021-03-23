@@ -9,4 +9,7 @@ const connection = mysql.createPool({
   database: dbConfig.DB,
 });
 
-module.exports = connection;
+module.exports = {
+    connection: connection,
+    mysql: mysql
+};

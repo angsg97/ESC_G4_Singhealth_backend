@@ -1,5 +1,6 @@
 # config files
 singhealth_backend/config/
+*.DS_Store
 
 # Logs
 logs
