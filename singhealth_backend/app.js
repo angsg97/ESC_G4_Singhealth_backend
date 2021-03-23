@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 
 if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
@@ -71,11 +71,13 @@ app.use("/", require("./routes/auth_route"));
 // Set route paths based on paths in route_paths file
 require(`./route_paths/route_paths`)(app, passport);
 
-// set port, listen for requests
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}.`);
-// });
+// Set Port to listen to if in production, otherwise run bin/www in dev
+if(process.env.NODE_ENV === "production"){
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+  })
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
