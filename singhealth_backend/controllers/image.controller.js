@@ -15,12 +15,18 @@ exports.request = async (req, res) => {
 
     //check if the file does not exist
     if(req.files === undefined){
-        res.status(500).send({
+        res.status(400).send({
             message: "no image provided"
         });
         return;
     }
 
+    if(req.files.file === undefined){
+        res.status(400).send({
+            message: "no image provided under file parameter"
+        });
+        return;
+    }
     //create the file to upload
     var file = req.files.file;
     var buf = Buffer.from(file.data);
@@ -32,7 +38,7 @@ exports.request = async (req, res) => {
     var uploadUrl = `${Date.now()}.jpg`;
 
     try{
-        
+
         //upload the buffer to the storage
         await storageRef.child(uploadUrl).put(buf, metadata).then((snapshot) => {
             console.log("uploaded file");
