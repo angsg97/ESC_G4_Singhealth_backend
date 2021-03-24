@@ -17,9 +17,8 @@ const COLUMNS = {
     score: {
         required: true
     },
-    fnb: {
-        required: false,
-        default: false
+    type: {
+        required: true
     }
 };
 
