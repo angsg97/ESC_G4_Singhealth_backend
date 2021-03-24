@@ -2,6 +2,7 @@
 const db = require("./db.js");
 const mysql = db.mysql;
 const connection = db.connection;
+const typeCheck = require('./type_checking.js');
 
 //the query collection holds the information for all the routes in the model
 const QueryCollection = function(data, routes){
@@ -81,6 +82,7 @@ const QueryCollection = function(data, routes){
 
             //check if all the columns of the body are defined
             let missingColumns = [];
+            let invalidProperty =[];
 
             for(let property in this.columns){
 
@@ -99,6 +101,14 @@ const QueryCollection = function(data, routes){
                     }
 
                 }
+                else{
+                    let type = this.columns[property].type;
+                    let issue = typeCheck(req.body[property], type);
+
+                    if(issue){
+                        invalidProperty.push(`value of ${property} is not a valid ${type}`);
+                    }
+                }
 
             }
 
@@ -107,6 +117,14 @@ const QueryCollection = function(data, routes){
                 result({
                     kind: "incomplete_body",
                     missing: missingColumns
+                }, null);
+                return;
+            }
+
+            if(invalidProperty.length){
+                result({
+                    kind: "invalid_body",
+                    issues: invalidProperty
                 }, null);
                 return;
             }

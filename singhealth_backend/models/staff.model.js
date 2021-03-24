@@ -5,15 +5,19 @@ const ID = `${TABLE}_id`;
 const COLUMNS = {
     name: {
         required: true,
+        type: "plain text"
     },
     phone: {
-        required: true
+        required: true,
+        type: "phone"
     },
     email: {
-        required: true
+        required: true,
+        type: "email"
     },
     institution: {
-        required: true
+        required: true,
+        type: "plain text"
     }
 };
 

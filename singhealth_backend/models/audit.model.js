@@ -5,20 +5,25 @@ const ID = `${TABLE}_id`;
 const COLUMNS = {
 
     staff_id: {
-        required: true
+        required: true,
+        type: "id"
     },
     tenant_id: {
-        required: true
+        required: true,
+        type: "id"
     },
     time: {
         required: false,
-        default: "Date.now()"
+        default: "Date.now()",
+        type: "timestamp"
     },
     score: {
-        required: true
+        required: true,
+        type: "number"
     },
     type: {
-        required: true
+        required: true,
+        type: "plain text"
     }
 };
 

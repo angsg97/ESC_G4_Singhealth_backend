@@ -4,34 +4,43 @@ const TABLE = "tenant";
 const ID = `${TABLE}_id`;
 const COLUMNS = {
     name: {
-        required: true
+        required: true,
+        type: "plain text"
     },
     phone: {
-        required: true
+        required: true,
+        type: "phone"
     },
     email: {
-        required: true
+        required: true,
+        type: "email"
     },
     institution: {
-        required: true
+        required: true,
+        type: "plain text"
     },
     fnb: {
         required: false,
-        default: false
+        default: false,
+        type: "boolean"
     },
     unit: {
-        required: true
+        required: true,
+        type: "unit"
     },
     image_logo: {
         required: false,
-        default: ""
+        default: "",
+        type: "url"
     },
     image_location: {
         required: false,
-        default: ""
+        default: "",
+        type: "url"
     },
     contract_date: {
-        required: true
+        required: true,
+        type: "timestamp"
     }
 };
 
