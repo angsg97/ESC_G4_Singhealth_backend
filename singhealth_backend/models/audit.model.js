@@ -52,11 +52,9 @@ const Audit = new QueryCollection(
 
     find_audit_by_staff_id: {
       path: `GET /staff_id/:staff_id`,
-      query: {
-        query: "select_from_param_data",
-        param: [{ param_data: "staff_id" }],
-        result: ["result_full"],
-      },
+      query: "select_from_param_data",
+      param: [{ param_data: "staff_id" }],
+      result: ["result_full"],
     },
 
     find_audit_by_tenant_id: {
