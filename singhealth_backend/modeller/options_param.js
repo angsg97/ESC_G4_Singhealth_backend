@@ -9,7 +9,11 @@ module.exports = (model) => {
         },
 
         body: (req, data) => {
-            return QueryCollection.filterColumns(model.columns, req.body);
+            let returnObject = {}
+            for(let property in model.columns){
+                returnObject[property] = req.body[property];
+            }
+            return returnObject;
         },
 
         param_id: (req, data) => {

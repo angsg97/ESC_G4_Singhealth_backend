@@ -204,14 +204,5 @@ const QueryCollection = function(data, routes){
 }
 
 
-QueryCollection.filterColumns = (columns, obj) =>{
-    let returnObject = {}
-    for(let property in columns){
-        returnObject[property] = obj[property];
-    }
-    return returnObject;
-}
-
-
 
 module.exports = QueryCollection;
