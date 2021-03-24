@@ -6,6 +6,9 @@ const COLUMNS = {
     audit_id: {
         required: true
     },
+    name: {
+        required: true
+    },
     category: {
         required: true
     },
@@ -51,11 +54,10 @@ const Issue = new QueryCollection(
 
     find_issue_by_audit_id: {
       path: `GET /audit_id/:audit_id`,
-      query: {
-        query: "select_from_param_data",
-        param: [{ param_data: "audit_id" }],
-        result: ["result_full"],
-      },
+      query: "select_from_param_data",
+      param: [{ param_data: "audit_id" }],
+      result: ["result_full"],
+
     },
 
     update_issue_by_issue_id: {
