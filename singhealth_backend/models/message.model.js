@@ -76,10 +76,24 @@ const Message = new QueryCollection(
         result: ["result_full"]
     },
 
-    find_message_by_issue_and_greater_than_time: {
-        path: `GET /issue_id_time/:issue_id/:time`,
+    find_message_by_greater_than_time_and_issue_id: {
+        path: `GET /time/:time/issue_id/:issue_id`,
         query: "select_from_data_param_greater_than_and_param_data",
         param: [{data: "time"}, {param_value_parse_int: "time"}, {param_data: "issue_id"}],
+        result: ["result_full"]
+    },
+
+    find_message_by_greater_than_time_and_staff_id: {
+        path: `GET /time/:time/staff_id/:staff_id`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {param_value_parse_int: "time"}, {param_data: "staff_id"}],
+        result: ["result_full"]
+    },
+
+    find_message_by_greater_than_time_and_tenant_id: {
+        path: `GET /time/:time/tenant_id/:tenant_id`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {param_value_parse_int: "time"}, {param_data: "tenant_id"}],
         result: ["result_full"]
     },
 
