@@ -100,6 +100,13 @@ const Tenant = new QueryCollection(
       result: ["param", "body"],
     },
 
+    remove_tenant_by_tenant_id_param: {
+      path: `DELETE /${ID}_param`,
+      query: "remove_from_param_id",
+      param: [{ query_param_id: null }],
+      result: [{ message: "successfully deleted" }, "query_id"],
+    },
+
     remove_tenant_by_tenant_id: {
       path: `DELETE /:${ID}`,
       query: "remove_from_param_id",
