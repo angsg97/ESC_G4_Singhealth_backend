@@ -4,6 +4,17 @@ const { TenantModel, AdminModel } = require("./auth.model");
 const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 
+const messages = {
+  INVALID_EMAIL_FORMAT: "Invalid Email Format",
+  EMAIL_ALR_EXISTS: "Email already exists in Database",
+  CREATE_USER_ERR: "Error occurred when trying to create user",
+  SIGNUP_SUCCESS: "Signup Successful",
+  EMAIL_NOT_EXIST: "Email does not exist in Database",
+  WRONG_PASS: "Entered password is wrong",
+  LOGIN_SUCCESS: "Login Successful",
+  DELETE_SUCCESS: "Deletion of user Successful",
+};
+
 const checkExistingUser = async function (model, email) {
   const user = await model.findOne({ email });
   if (user) {
@@ -11,40 +22,31 @@ const checkExistingUser = async function (model, email) {
   }
 };
 
-// method to check for valid emailgit fetch
+// method to check for valid email
 const validateEmail = (email) => {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
 const authController = {
-  async signup(req, res, next) {
+  async tenant_signup(req, res, next) {
     try {
       const email = req.body.email;
       const password = req.body.password;
 
       // Check for valid email
       if (!validateEmail(email)) {
-        console.log("Invalid Email Format");
-        return res.status(400).json({ message: "Invalid Email Format" });
+        console.log(messages.INVALID_EMAIL_FORMAT);
+        return res.status(400).json({ message: messages.INVALID_EMAIL_FORMAT });
       }
 
-      // Check if duplicate Tenant exists
+      // Check if duplicate Tenant or Admin exists
       const hasTenant = await checkExistingUser(TenantModel, email);
-      if (hasTenant) {
-        console.log("Email already exists in Tenant account");
-        return res
-          .status(400)
-          .json({ message: "Email already exists in Tenant account" });
-      }
-
-      // Check if duplicate Admin exists
       const hasAdmin = await checkExistingUser(AdminModel, email);
-      if (hasAdmin) {
-        console.log("Email already exists in Admin account");
-        return res
-          .status(400)
-          .json({ message: "Email already exists in Admin account" });
+
+      if (hasTenant || hasAdmin) {
+        console.log(messages.EMAIL_ALR_EXISTS);
+        return res.status(400).json({ message: messages.EMAIL_ALR_EXISTS });
       }
 
       // Proceed with user signup
@@ -53,10 +55,10 @@ const authController = {
         password: password,
       });
       if (!user) {
-        next(new Error("Error occurred when trying to create user"));
+        next(new Error(messages.CREATE_USER_ERR));
       } else {
         return res.status(201).json({
-          message: "Tenant Signup Successful",
+          message: messages.SIGNUP_SUCCESS,
           user: user,
         });
       }
@@ -72,26 +74,17 @@ const authController = {
 
       // Check for valid email
       if (!validateEmail(email)) {
-        console.log("Invalid Email Format");
-        return res.status(400).json({ message: "Invalid Email Format" });
+        console.log(messages.INVALID_EMAIL_FORMAT);
+        return res.status(400).json({ message: messages.INVALID_EMAIL_FORMAT });
       }
 
-      // Check if duplicate Tenant exists
+      // Check if duplicate Tenant or Admin exists
       const hasTenant = await checkExistingUser(TenantModel, email);
-      if (hasTenant) {
-        console.log("Email already exists in Tenant account");
-        return res
-          .status(400)
-          .json({ message: "Email already exists in Tenant account" });
-      }
-
-      // Check if duplicate Admin exists
       const hasAdmin = await checkExistingUser(AdminModel, email);
-      if (hasAdmin) {
-        console.log("Email already exists in Admin account");
-        return res
-          .status(400)
-          .json({ message: "Email already exists in Admin account" });
+
+      if (hasTenant || hasAdmin) {
+        console.log(messages.EMAIL_ALR_EXISTS);
+        return res.status(400).json({ message: messages.EMAIL_ALR_EXISTS });
       }
 
       // Proceed with user signup
@@ -100,10 +93,10 @@ const authController = {
         password: password,
       });
       if (!user) {
-        next(new Error("Error occurred when trying to create user"));
+        next(new Error(messages.CREATE_USER_ERR));
       } else {
         return res.status(201).json({
-          message: "Admin Signup Successful",
+          message: messages.SIGNUP_SUCCESS,
           user: user,
         });
       }
@@ -112,6 +105,53 @@ const authController = {
     }
   },
 
+  async tenant_delete(req, res, next) {
+    try {
+      const email = req.body.email;
+      const hasTenant = await checkExistingUser(TenantModel, email);
+
+      if (!hasTenant) {
+        console.log(messages.EMAIL_NOT_EXIST);
+        return res.status(400).json({ message: messages.EMAIL_NOT_EXIST });
+      }
+
+      await TenantModel.deleteOne(
+        {
+          email: email,
+        },
+      );
+
+      console.log(messages.DELETE_SUCCESS);
+      return res.json({ message: messages.DELETE_SUCCESS });
+
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  async admin_delete(req, res, next) {
+    try {
+      const email = req.body.email;
+      const hasAdmin = await checkExistingUser(AdminModel, email);
+
+      if (!hasAdmin) {
+        console.log(messages.EMAIL_NOT_EXIST);
+        return res.status(400).json({ message: messages.EMAIL_NOT_EXIST });
+      }
+
+      await AdminModel.deleteOne(
+        {
+          email: email,
+        },
+      );
+
+      console.log(messages.DELETE_SUCCESS);
+      return res.json({ message: messages.DELETE_SUCCESS });
+
+    } catch (err) {
+      next(err);
+    }
+  }
 };
 
 // Signup middleware to allow creation of tenant in DB
@@ -225,8 +265,8 @@ passport.use(
 
         // If tenant and admin email both don't exist in the database
         if (!tenant && !admin) {
-          console.log("User not found");
-          return done(null, false, { message: "User not found" });
+          console.log(messages.EMAIL_NOT_EXIST);
+          return done(null, false, { message: messages.EMAIL_NOT_EXIST });
         }
         // If tenant exists, check if password matches
         else if (tenant) {
@@ -234,11 +274,12 @@ passport.use(
           console.log(validate);
 
           if (!validate) {
-            console.log("Tenant password is wrong");
-            return done(null, false, { message: "Wrong Password" });
+            console.log(messages.WRONG_PASS);
+            return done(null, false, { message: messages.WRONG_PASS });
           } else {
+            console.log(messages.LOGIN_SUCCESS);
             return done(null, tenant, {
-              message: "Logged in as User Succesfully",
+              message: messages.LOGIN_SUCCESS,
               isAdmin: false,
             });
           }
@@ -248,11 +289,12 @@ passport.use(
           const validate = await admin.isValidPassword(password);
 
           if (!validate) {
-            console.log("Admin password is wrong");
-            return done(null, false, { message: "Wrong Password" });
+            console.log(messages.WRONG_PASS);
+            return done(null, false, { message: messages.WRONG_PASS });
           } else {
+            console.log(messages.LOGIN_SUCCESS);
             return done(null, admin, {
-              message: "Logged in as Admin Succesfully",
+              message: messages.LOGIN_SUCCESS,
               isAdmin: true,
             });
           }

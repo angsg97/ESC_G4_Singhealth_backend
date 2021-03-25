@@ -64,9 +64,6 @@ app.get("/", (req, res) => {
   res.json({ message: "YAYYY IT WORKS!!!\nRoot Access Successful" });
 });
 
-// TEMPORARY, add /login and /signup to routes
-app.use("/", require("./routes/auth_route"));
-
 // Set route paths based on paths in route_paths file
 require(`./route_paths/route_paths`)(app, passport);
 

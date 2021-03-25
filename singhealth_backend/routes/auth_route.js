@@ -5,31 +5,11 @@ const authController = require("../auth/auth");
 
 const router = express.Router();
 
-// TODO: Move functions to auth controller
-router.post("/signup", authController.signup);
+// TODO: Move all AUTH routes to /auth
+router.post("/tenant_signup", authController.tenant_signup);
 router.post("/admin_signup", authController.admin_signup);
-
-// router.post(
-//   "/signup",
-//   passport.authenticate("signup", { session: false }),
-//   async (req, res, next) => {
-//     res.status(201).json({
-//       message: "User Signup successful",
-//       user: req.user,
-//     });
-//   }
-// );
-
-// router.post(
-//   "/admin_signup",
-//   passport.authenticate("admin_signup", { session: false }),
-//   async (req, res, next) => {
-//     res.status(201).json({
-//       message: "Admin User Signup successful",
-//       user: req.user,
-//     });
-//   }
-// );
+router.delete("/tenant_delete", authController.tenant_delete);
+router.delete("/admin_delete", authController.admin_delete);
 
 router.post("/login", async (req, res, next) => {
   passport.authenticate("login", async (err, user, info) => {

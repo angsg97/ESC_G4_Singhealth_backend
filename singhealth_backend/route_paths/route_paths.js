@@ -41,4 +41,8 @@ module.exports = (app, passport) => {
     auth,
     require("../routes/email.routes")
   );
+  app.use(
+    `/auth`,
+    require("../routes/auth_route")
+  );
 };
