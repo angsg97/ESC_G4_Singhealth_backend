@@ -19,7 +19,7 @@ router.post("/login", async (req, res, next) => {
       }
 
       if (!user) {
-        res.status(404).json(info);
+        return res.status(404).json(info);
       }
 
       req.login(user, { session: false }, async (error) => {
