@@ -1,30 +1,35 @@
 const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const authController = require("../auth/auth");
 
 const router = express.Router();
 
-router.post(
-  "/signup",
-  passport.authenticate("signup", { session: false }),
-  async (req, res, next) => {
-    res.status(201).json({
-      message: "User Signup successful",
-      user: req.user,
-    });
-  }
-);
+// TODO: Move functions to auth controller
+router.post("/signup", authController.signup);
+router.post("/admin_signup", authController.admin_signup);
 
-router.post(
-  "/admin_signup",
-  passport.authenticate("admin_signup", { session: false }),
-  async (req, res, next) => {
-    res.status(201).json({
-      message: "Admin User Signup successful",
-      user: req.user,
-    });
-  }
-);
+// router.post(
+//   "/signup",
+//   passport.authenticate("signup", { session: false }),
+//   async (req, res, next) => {
+//     res.status(201).json({
+//       message: "User Signup successful",
+//       user: req.user,
+//     });
+//   }
+// );
+
+// router.post(
+//   "/admin_signup",
+//   passport.authenticate("admin_signup", { session: false }),
+//   async (req, res, next) => {
+//     res.status(201).json({
+//       message: "Admin User Signup successful",
+//       user: req.user,
+//     });
+//   }
+// );
 
 router.post("/login", async (req, res, next) => {
   passport.authenticate("login", async (err, user, info) => {
