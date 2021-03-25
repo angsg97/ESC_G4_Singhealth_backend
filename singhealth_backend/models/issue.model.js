@@ -51,6 +51,13 @@ const Issue = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_issue_by_issue_id_param: {
+      path: `GET /${ID}_param`,
+      query: "select_from_param_id",
+      param: [{ query_param_id: null }],
+      result: ["result_first"],
+    },
+
     find_issue_by_issue_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -66,11 +73,25 @@ const Issue = new QueryCollection(
 
     },
 
+    update_issue_by_issue_id_param: {
+      path: `PUT /${ID}_param`,
+      query: "update_from_param_id",
+      param: [{ body: null }, { query_param_id: null }],
+      result: ["query_id", "body"],
+    },
+
     update_issue_by_issue_id: {
       path: `PUT /:${ID}`,
       query: "update_from_param_id",
       param: [{ body: null }, { param_id: null }],
       result: ["param", "body"],
+    },
+
+    remove_issue_by_issue_id_param: {
+      path: `DELETE /${ID}_param`,
+      query: "remove_from_param_id",
+      param: [{ query_param_id: null }],
+      result: [{ message: "successfully deleted" }, "query_id"],
     },
 
     remove_issue_by_issue_id: {

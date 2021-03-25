@@ -71,6 +71,13 @@ const Message = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_message_by_message_id_param: {
+      path: `GET /${ID}_param`,
+      query: "select_from_param_id",
+      param: [{ query_param_id: null }],
+      result: ["result_first"],
+    },
+
     find_message_by_message_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -106,11 +113,25 @@ const Message = new QueryCollection(
         result: ["result_full"]
     },
 
+    update_message_by_message_id_param: {
+      path: `PUT /${ID}_param`,
+      query: "update_from_param_id",
+      param: [{ body: null }, { query_param_id: null }],
+      result: ["query_id", "body"],
+    },
+
     update_message_by_message_id: {
       path: `PUT /:${ID}`,
       query: "update_from_param_id",
       param: [{ body: null }, { param_id: null }],
       result: ["param", "body"],
+    },
+
+    remove_message_by_message_id_param: {
+      path: `DELETE /${ID}_param`,
+      query: "remove_from_param_id",
+      param: [{ query_param_id: null }],
+      result: [{ message: "successfully deleted" }, "query_id"],
     },
 
     remove_message_by_message_id: {

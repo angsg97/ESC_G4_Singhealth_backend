@@ -12,6 +12,10 @@ module.exports = (model) => {
             return req.params;
         },
 
+        query_id: (req, res) => {
+            return {[model.name_id]: req.query[model.name_id]}
+        },
+
         body: (req, res) => {
             return req.body;
         },

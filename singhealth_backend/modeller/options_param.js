@@ -16,6 +16,15 @@ module.exports = (model) => {
             return returnObject;
         },
 
+        query_param_id: (req, data) => {
+            console.log("QUERY PARAM ID", req.query)
+            return req.query[model.name_id];
+        },
+        
+        query_param_data: (req, data) => {
+            return {[data]: req.query[data]};
+        },
+
         param_id: (req, data) => {
             return req.params[model.name_id];
         },

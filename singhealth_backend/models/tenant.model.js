@@ -65,6 +65,13 @@ const Tenant = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_tenant_by_tenant_id_param: {
+      path: `GET /${ID}_param`,
+      query: "select_from_param_id",
+      param: [{ query_param_id: null }],
+      result: ["result_first"],
+    },
+
     find_tenant_by_tenant_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -79,7 +86,14 @@ const Tenant = new QueryCollection(
       result: ["result_full"],
     },
 
-    update_tenant_by_tenant_id: {
+    update_tenant_by_param_tenant_id: {
+      path: `PUT /${ID}_param`,
+      query: "update_from_param_id",
+      param: [{ body: null }, { query_param_id: null }],
+      result: ["query_id", "body"],
+    },
+
+    update_tenant_by_tenant_id_param: {
       path: `PUT /:${ID}`,
       query: "update_from_param_id",
       param: [{ body: null }, { param_id: null }],

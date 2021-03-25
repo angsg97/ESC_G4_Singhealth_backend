@@ -62,6 +62,7 @@ const QueryCollection = function(data, routes){
         //get the query model object
         let queryModel = this.routes[queryType];
 
+        console.log(req.query);
 
         if(!(queryModel.query in this.queryMap)){
             result({
