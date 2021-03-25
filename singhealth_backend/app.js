@@ -18,25 +18,24 @@ var fileUpload = require("express-fileupload");
 
 var mongoose = require("mongoose");
 
-// Set up MongoDB using credentials
-
-mongoose.connect(
-  process.env.MONGODB_URI,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (!err) {
-      console.log("MongoDB has connected successfully");
-    } else {
-      console.log(err);
+// Set up MongoDB using credentials if not testing
+if(process.env.NODE_ENV !== "test"){
+  mongoose.connect(
+    process.env.MONGODB_URI,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    },
+    (err) => {
+      if (!err) {
+        console.log("MongoDB has connected successfully");
+      } else {
+        console.log(err);
+      }
     }
-  }
-);
-mongoose.set("useCreateIndex", true);
-
-//mongoose.connection.on("error", (err) => console.log(err));
+  );
+}
 
 // Setup passport using auth.js
 require("./auth/auth");
@@ -91,6 +90,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({ error: err });
 });
-
 
 module.exports = app;
