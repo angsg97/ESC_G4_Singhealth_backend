@@ -15,6 +15,9 @@ module.exports = (value, type) => {
             break;
 
         case "phone":
+            if(typeof(value)!=="string"){
+                return true;
+            }
             //check if the value is 8 digits long
             if(value.length !=8 || value.match(/^[0-9]+$/) == null){
                 return true;
@@ -22,12 +25,18 @@ module.exports = (value, type) => {
             break;
 
         case "email":
+            if(typeof(value)!=="string"){
+                return true;
+            }
             if(!(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(value))){
                 return true;
             }
             break;
 
         case "url":
+            if(typeof(value)!=="string"){
+                return true;
+            }
             if(value == ""){}
             else if(!(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(value))){
                 return true;
@@ -52,6 +61,9 @@ module.exports = (value, type) => {
             break;
 
         case "unit":
+            if(typeof(value)!=="string"){
+                return true;
+            }
             var split = value.split("-");
             if(split.length != 2){
                 return true;
@@ -63,13 +75,18 @@ module.exports = (value, type) => {
             break;
 
         case "plain text":
+            if(typeof(value)!=="string"){
+                return true;
+            }
             if(!(/^[a-zA-Z\s]*$/.test(value))){
                 return true;
             }
             break;
 
         case "any text":
-
+            if(typeof(value)!=="string"){
+                return true;
+            }
             break;
 
     }

@@ -13,7 +13,7 @@ module.exports = (app, passport) => {
   );
   app.use(
     `/api/tenant`,
-    admin_auth,
+    auth,
     new Routes("tenant").router
   );
   app.use(
