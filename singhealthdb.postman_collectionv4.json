@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"George\",\n    \"phone\": \"264593726\",\n    \"email\": \"george@gmail.com\",\n    \"institution\": \"ABC\"\n}",
+							"raw": "{\n    \"name\": \"George\",\n    \"phone\": \"26453726\",\n    \"email\": \"george@gmail.com\",\n    \"institution\": \"ABC\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,6 +92,35 @@
 					"response": []
 				},
 				{
+					"name": "Staff Find By Staff Id Param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/staff/staff_id_param?secret_token={{token}}&staff_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								"staff_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "staff_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Staff Find By Institution",
 					"request": {
 						"method": "GET",
@@ -118,13 +147,42 @@
 					"response": []
 				},
 				{
+					"name": "Staff Find By Institution Param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/staff/institution_param?secret_token={{token}}&institution=ABC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								"institution_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "institution",
+									"value": "ABC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Staff Update",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Freddo44\",\n    \"phone\": \"87654321\",\n    \"email\": \"freddy@fred.fred\",\n    \"institution\": \"ABC\"\n}",
+							"raw": "{\n    \"name\": \"Freddo\",\n    \"phone\": \"87654321\",\n    \"email\": \"freddy@gmail.com\",\n    \"institution\": \"ABC\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,19 +190,59 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/staff/4?secret_token={{token}}",
+							"raw": "{{base_url}}/api/staff/4/?secret_token={{token}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"staff",
-								"4"
+								"4",
+								""
 							],
 							"query": [
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff Update Param",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Freddo\",\n    \"phone\": \"87654321\",\n    \"email\": \"freddy@gmail.com\",\n    \"institution\": \"ABC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/staff/staff_id_param/?secret_token={{token}}&staff_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								"staff_id_param",
+								""
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "staff_id",
+									"value": "4"
 								}
 							]
 						}
@@ -179,6 +277,44 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff Delete Param",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/staff/staff_id_param?secret_token={{token}}&staff_id=44",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								"staff_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "staff_id",
+									"value": "44"
 								}
 							]
 						}
@@ -297,6 +433,47 @@
 					"response": []
 				},
 				{
+					"name": "Tenant Find by Tenant ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tenant/tenant_id_param?secret_token={{token}}&tenant_id=74",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tenant",
+								"tenant_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "tenant_id",
+									"value": "74"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Tenant Find by Institution",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -328,6 +505,48 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant Find by Institution Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tenant/institution_param/?secret_token={{token}}&institution=ABC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tenant",
+								"institution_param",
+								""
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "institution",
+									"value": "ABC"
 								}
 							]
 						}
@@ -369,6 +588,44 @@
 					"response": []
 				},
 				{
+					"name": "Tenant Update Param",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Subway\",\n    \"phone\": \"42536475\",\n    \"email\": \"eatfresh@subway.com\",\n    \"institution\": \"ABC\",\n    \"fnb\": true,\n    \"unit\": \"05-05\",\n    \"image_logo\": \"\",\n    \"image_location\": \"\",\n    \"contract_date\": 1648000000000\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tenant/tenant_id_param?secret_token={{token}}&tenant_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tenant",
+								"tenant_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "tenant_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Tenant Delete",
 					"request": {
 						"method": "DELETE",
@@ -396,6 +653,44 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant Delete Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tenant/tenant_id_param?secret_token={{token}}&tenant_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tenant",
+								"tenant_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "tenant_id",
+									"value": "4"
 								}
 							]
 						}
@@ -458,15 +753,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/audit/time/1615960147056?secret_token={{token}}",
+							"raw": "{{base_url}}/api/audit/?secret_token={{token}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"audit",
-								"time",
-								"1615960147056"
+								""
 							],
 							"query": [
 								{
@@ -516,6 +810,47 @@
 					"response": []
 				},
 				{
+					"name": "Audit Find by Audit ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/audit_id_param?secret_token={{token}}&audit_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"audit_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "audit_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Audit Find by Staff ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -547,6 +882,47 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Audit Find by Staff ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/staff_id_param?secret_token={{token}}&staff_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"staff_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "staff_id",
+									"value": "4"
 								}
 							]
 						}
@@ -592,6 +968,47 @@
 					"response": []
 				},
 				{
+					"name": "Audit Find by Tenant ID Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/tenant_id_param?secret_token={{token}}&tenant_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"tenant_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "tenant_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Audit Find by Greater than Time",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -623,6 +1040,48 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Audit Find by Greater than Time Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/time_param/?secret_token={{token}}&time=1616382881670",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"time_param",
+								""
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "time",
+									"value": "1616382881670"
 								}
 							]
 						}
@@ -810,6 +1269,47 @@
 					"response": []
 				},
 				{
+					"name": "Issue Find by Issue ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/issue/issue_id_param?secret_token={{token}}&issue_id=14",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"issue",
+								"issue_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "issue_id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Issue Find by Audit ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -841,6 +1341,47 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Issue Find by Audit ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/issue/audit_id_param?secret_token={{token}}&audit_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"issue",
+								"audit_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "audit_id",
+									"value": "4"
 								}
 							]
 						}
@@ -882,6 +1423,44 @@
 					"response": []
 				},
 				{
+					"name": "Issue Update Param",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"audit_id\": 4,\n    \"name\": \"Awful food\",\n    \"category\": \"Food\",\n    \"description\": \"Tastes like garbage\",\n    \"due_date\": 1615958538774,\n    \"resolved\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/issue/issue_id_param?secret_token={{token}}&issue_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"issue",
+								"issue_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "issue_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Issue Delete",
 					"request": {
 						"method": "DELETE",
@@ -909,6 +1488,44 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Issue Delete Param",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/issue/issue_id_param?secret_token={{token}}&issue_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"issue",
+								"issue_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "issue_id",
+									"value": "4"
 								}
 							]
 						}
@@ -1027,6 +1644,47 @@
 					"response": []
 				},
 				{
+					"name": "Message Find by Message ID Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/message_id_param?secret_token={{token}}&message_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"message_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "message_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Message Find by Issue ID",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1058,6 +1716,47 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Find by Issue ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/issue_id_param?secret_token={{token}}&issue_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"issue_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "issue_id",
+									"value": "4"
 								}
 							]
 						}
@@ -1105,7 +1804,7 @@
 					"response": []
 				},
 				{
-					"name": "Message Find by Time and Staff ID",
+					"name": "Message Find by Time and Issue ID Param",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -1122,22 +1821,27 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/message/time/0/staff_id/4?secret_token={{token}}",
+							"raw": "{{base_url}}/api/message/time_issue_id_param?secret_token={{token}}&time=0&issue_id=4",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"message",
-								"time",
-								"0",
-								"staff_id",
-								"4"
+								"time_issue_id_param"
 							],
 							"query": [
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								},
+								{
+									"key": "time",
+									"value": "0"
+								},
+								{
+									"key": "issue_id",
+									"value": "4"
 								}
 							]
 						}
@@ -1178,6 +1882,136 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Find by Time and Staff ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/time_staff_id_param?secret_token={{token}}&time=0&staff_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"time_staff_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "time",
+									"value": "0"
+								},
+								{
+									"key": "staff_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Find by Time and Tenant ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/time/0/tenant_id/4?secret_token={{token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"time",
+								"0",
+								"tenant_id",
+								"4"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Find by Time and Tenant ID Param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/time_tenant_id_param?secret_token={{token}}&time=0&tenant_id=4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"time_tenant_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "time",
+									"value": "0"
+								},
+								{
+									"key": "tenant_id",
+									"value": "4"
 								}
 							]
 						}
@@ -1199,7 +2033,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/message/0?secret_token={{token++",
+							"raw": "{{base_url}}/api/message/0?secret_token={{token}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1211,7 +2045,45 @@
 							"query": [
 								{
 									"key": "secret_token",
-									"value": "{{token++"
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Update Param",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"issue_id\": 4,\n    \"staff_id\": 4,\n    \"tenant_id\": 4,\n    \"from_staff\": false,\n    \"tag\": \"\",\n    \"info\": \"\",\n    \"body\": \"yeah. your food tastes bad.\",\n    \"image\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/message_id_param?secret_token={{token}}&message_id=24",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"message_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "message_id",
+									"value": "24"
 								}
 							]
 						}
@@ -1246,6 +2118,44 @@
 								{
 									"key": "secret_token",
 									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message Delete Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/message/message_id_param?secret_token={{token}}&message_id=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"message",
+								"message_id_param"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "message_id",
+									"value": "0"
 								}
 							]
 						}
@@ -1415,7 +2325,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"to\": \"destiny.jonathan@gmail.com\",\n    \"subject\": \"Audit form\",\n    \"text\": \"an audit was conducted\"\n}",
+							"raw": "{\n    \"to\": \"destiny.jonathan@gmail.com\",\n    \"subject\": \"HTML TEST\",\n    \"text\": \"Html should show below\",\n    \"html\": \"<p>Hello world</p><button type='button'>Click Me!</button>\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1471,7 +2381,8 @@
 		},
 		{
 			"key": "base_url",
-			"value": "localhost:8080"
+			"value": "localhost:8080",
+			"disabled": true
 		},
 		{
 			"key": "token",

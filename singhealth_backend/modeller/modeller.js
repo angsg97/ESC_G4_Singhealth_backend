@@ -2,6 +2,7 @@
 const db = require("./db.js");
 const mysql = db.mysql;
 const connection = db.connection;
+const typeCheck = require('./type_checking.js');
 
 //the query collection holds the information for all the routes in the model
 const QueryCollection = function(data, routes){
@@ -61,6 +62,7 @@ const QueryCollection = function(data, routes){
         //get the query model object
         let queryModel = this.routes[queryType];
 
+        console.log(req.query);
 
         if(!(queryModel.query in this.queryMap)){
             result({
@@ -81,6 +83,7 @@ const QueryCollection = function(data, routes){
 
             //check if all the columns of the body are defined
             let missingColumns = [];
+            let invalidProperty =[];
 
             for(let property in this.columns){
 
@@ -99,6 +102,14 @@ const QueryCollection = function(data, routes){
                     }
 
                 }
+                else{
+                    let type = this.columns[property].type;
+                    let issue = typeCheck(req.body[property], type);
+
+                    if(issue){
+                        invalidProperty.push(`value of ${property} is not a valid ${type}`);
+                    }
+                }
 
             }
 
@@ -111,10 +122,20 @@ const QueryCollection = function(data, routes){
                 return;
             }
 
+            if(invalidProperty.length){
+                result({
+                    kind: "invalid_body",
+                    issues: invalidProperty
+                }, null);
+                return;
+            }
+
         }
 
         let paramArray = [];
         let paramArrayData = [];
+        let paramArrayMissing = [];
+
 
         for(var i = 0; i<queryModel.param.length; i++){
 
@@ -127,10 +148,23 @@ const QueryCollection = function(data, routes){
                 });
                 return;
             }
+            let paramValue = this.paramMap[paramName](req, paramData);
+            if(paramValue.error){
+                paramArrayMissing.push(paramValue.error);
+            }
+            else{
+                paramArrayData.push(paramData);
+                paramArray.push(paramValue.value);
+            }
 
-            paramArrayData.push(paramData);
-            paramArray.push(this.paramMap[paramName](req, paramData));
+        }
 
+        if(paramArrayMissing.length){
+            result({
+                kind: "incomplete_query_param",
+                missing: paramArrayMissing
+            });
+            return;
         }
 
         console.log(queryString, paramArray);

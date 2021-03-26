@@ -4,34 +4,43 @@ const TABLE = "tenant";
 const ID = `${TABLE}_id`;
 const COLUMNS = {
     name: {
-        required: true
+        required: true,
+        type: "plain text"
     },
     phone: {
-        required: true
+        required: true,
+        type: "phone"
     },
     email: {
-        required: true
+        required: true,
+        type: "email"
     },
     institution: {
-        required: true
+        required: true,
+        type: "plain text"
     },
     fnb: {
         required: false,
-        default: false
+        default: false,
+        type: "boolean"
     },
     unit: {
-        required: true
+        required: true,
+        type: "unit"
     },
     image_logo: {
         required: false,
-        default: ""
+        default: "",
+        type: "url"
     },
     image_location: {
         required: false,
-        default: ""
+        default: "",
+        type: "url"
     },
     contract_date: {
-        required: true
+        required: true,
+        type: "timestamp"
     }
 };
 
@@ -56,6 +65,20 @@ const Tenant = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_tenant_by_tenant_id_param: {
+      path: `GET /${ID}_param`,
+      query: "select_from_param_id",
+      param: [{ query_param_id: null }],
+      result: ["result_first"],
+    },
+
+    find_tenant_by_institution_param: {
+      path: `GET /institution_param`,
+      query: "select_from_param_data",
+      param: [{ query_param_data: "institution" }],
+      result: ["result_full"],
+    },
+
     find_tenant_by_tenant_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -70,11 +93,25 @@ const Tenant = new QueryCollection(
       result: ["result_full"],
     },
 
+    update_tenant_by_tenant_id_param: {
+      path: `PUT /${ID}_param`,
+      query: "update_from_param_id",
+      param: [{ body: null }, { query_param_id: null }],
+      result: ["query_id", "body"],
+    },
+
     update_tenant_by_tenant_id: {
       path: `PUT /:${ID}`,
       query: "update_from_param_id",
       param: [{ body: null }, { param_id: null }],
       result: ["param", "body"],
+    },
+
+    remove_tenant_by_tenant_id_param: {
+      path: `DELETE /${ID}_param`,
+      query: "remove_from_param_id",
+      param: [{ query_param_id: null }],
+      result: [{ message: "successfully deleted" }, "query_id"],
     },
 
     remove_tenant_by_tenant_id: {

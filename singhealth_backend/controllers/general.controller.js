@@ -30,10 +30,24 @@ const Controller = function (model, queryType) {
             });
             break;
 
+          case "incomplete_query_param":
+            res.status(400).send({
+              message: `incomplete query param. missing ${err.missing}`,
+            });
+            break;
+
           //incomplete body error
           case "incomplete_body":
-            res.status(403).send({
+            res.status(400).send({
               message: `incomplete body. missing ${err.missing}`,
+            });
+            break;
+
+
+          case "invalid_body":
+            res.status(400).send({
+              message: `invalid body.`,
+              issues: err.issues,
             });
             break;
 

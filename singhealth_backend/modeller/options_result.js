@@ -9,7 +9,14 @@ module.exports = (model) => {
         },
 
         param: (req, res) => {
+            if(req.params[model.name_id] !== undefined){
+                req.params[model.name_id] = parseInt(req.params[model.name_id]);
+            }
             return req.params;
+        },
+
+        query_id: (req, res) => {
+            return {[model.name_id]: parseInt(req.query[model.name_id])}
         },
 
         body: (req, res) => {
@@ -17,7 +24,7 @@ module.exports = (model) => {
         },
 
         insert_id: (req, res) => {
-            return {[model.name_id]: res.insertId};
+            return {[model.name_id]: parseInt(res.insertId)};
         }
 
     }

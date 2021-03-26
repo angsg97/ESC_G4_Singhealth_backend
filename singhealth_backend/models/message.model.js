@@ -4,37 +4,46 @@ const TABLE = "message";
 const ID = `${TABLE}_id`;
 const COLUMNS = {
     issue_id: {
-        required: true
+        required: true,
+        type: "id"
     },
     staff_id: {
-        required: true
+        required: true,
+        type: "id"
     },
     tenant_id: {
-        required: true
+        required: true,
+        type: "id"
     },
     time: {
         required: false,
-        default: "Date.now()"
+        default: "Date.now()",
+        type: "timestamp"
     },
     from_staff: {
         required: false,
-        default: false
+        default: false,
+        type: "boolean"
     },
     tag: {
         required: false,
-        default: ""
+        default: "",
+        type: "any text"
     },
     info: {
         required: false,
-        default: ""
+        default: "",
+        type: "any text"
     },
     body: {
         required: false,
-        default: ""
+        default: "",
+        type: "any text"
     },
     image: {
         required: false,
-        default: ""
+        default: "",
+        type: "url"
     }
 
 };
@@ -60,6 +69,41 @@ const Message = new QueryCollection(
       query: "select_all",
       param: [{ none: null }],
       result: ["result_full"],
+    },
+
+    find_message_by_message_id_param: {
+      path: `GET /${ID}_param`,
+      query: "select_from_param_id",
+      param: [{ query_param_id: null }],
+      result: ["result_first"],
+    },
+
+    find_message_by_issue_id_param: {
+        path: `GET /issue_id_param`,
+        query: "select_from_param_data",
+        param: [{query_param_data: "issue_id"}],
+        result: ["result_full"]
+    },
+
+    find_message_by_greater_than_time_and_issue_id_param: {
+        path: `GET /time_issue_id_param`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {query_param_value_parse_int: "time"}, {query_param_data: "issue_id"}],
+        result: ["result_full"]
+    },
+
+    find_message_by_greater_than_time_and_staff_id_param: {
+        path: `GET /time_staff_id_param`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {query_param_value_parse_int: "time"}, {query_param_data: "staff_id"}],
+        result: ["result_full"]
+    },
+
+    find_message_by_greater_than_time_and_tenant_id_param: {
+        path: `GET /time_tenant_id_param`,
+        query: "select_from_data_param_greater_than_and_param_data",
+        param: [{data: "time"}, {query_param_value_parse_int: "time"}, {query_param_data: "tenant_id"}],
+        result: ["result_full"]
     },
 
     find_message_by_message_id: {
@@ -97,11 +141,25 @@ const Message = new QueryCollection(
         result: ["result_full"]
     },
 
+    update_message_by_message_id_param: {
+      path: `PUT /${ID}_param`,
+      query: "update_from_param_id",
+      param: [{ body: null }, { query_param_id: null }],
+      result: ["query_id", "body"],
+    },
+
     update_message_by_message_id: {
       path: `PUT /:${ID}`,
       query: "update_from_param_id",
       param: [{ body: null }, { param_id: null }],
       result: ["param", "body"],
+    },
+
+    remove_message_by_message_id_param: {
+      path: `DELETE /${ID}_param`,
+      query: "remove_from_param_id",
+      param: [{ query_param_id: null }],
+      result: [{ message: "successfully deleted" }, "query_id"],
     },
 
     remove_message_by_message_id: {
