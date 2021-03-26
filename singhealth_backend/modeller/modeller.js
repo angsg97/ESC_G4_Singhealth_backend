@@ -62,8 +62,6 @@ const QueryCollection = function(data, routes){
         //get the query model object
         let queryModel = this.routes[queryType];
 
-        console.log(req.query);
-
         if(!(queryModel.query in this.queryMap)){
             result({
                 message: `${queryModel.query} is not a valid query type`
@@ -227,6 +225,7 @@ const QueryCollection = function(data, routes){
 
             //call the model result return function
             result(null, resultObject);
+            return;
 
         });
 
