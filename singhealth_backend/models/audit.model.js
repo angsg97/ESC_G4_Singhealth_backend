@@ -55,6 +55,28 @@ const Audit = new QueryCollection(
       result: ["result_first"],
     },
 
+    find_audit_by_staff_id_param: {
+      path: `GET /staff_id_param`,
+      query: "select_from_param_data",
+      param: [{ query_param_data: "staff_id" }],
+      result: ["result_first"],
+    },
+
+    find_audit_by_tenant_id_param: {
+      path: `GET /tenant_id_param`,
+      query: "select_from_param_data",
+      param: [{ query_param_data: "tenant_id" }],
+      result: ["result_first"],
+    },
+
+    find_audit_by_greater_than_time_param: {
+        path: `GET /time_param`,
+        query: "select_from_data_param_greater_than",
+        param: [{data: "time"}, {query_param_data: "time"}],
+        result: ["result_full"]
+
+    },
+
     find_audit_by_audit_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -75,6 +97,7 @@ const Audit = new QueryCollection(
       param: [{ param_data: "tenant_id" }],
       result: ["result_full"],
     },
+
 
     find_audit_by_greater_than_time: {
         path: `GET /time/:time`,

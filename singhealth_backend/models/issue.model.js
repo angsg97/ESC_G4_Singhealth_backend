@@ -58,6 +58,14 @@ const Issue = new QueryCollection(
       result: ["result_first"],
     },
 
+    find_issue_by_audit_id_param: {
+      path: `GET /audit_id_param`,
+      query: "select_from_param_data",
+      param: [{ query_param_data: "audit_id" }],
+      result: ["result_full"],
+
+    },
+
     find_issue_by_issue_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",

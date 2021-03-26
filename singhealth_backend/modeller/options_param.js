@@ -1,11 +1,15 @@
 module.exports = (model) => {
     return {
         none: (req, data) => {
-            return "";
+            return {
+                value: ""
+            };
         },
 
         data: (req, data) => {
-            return data;
+            return {
+                value: data
+            }
         },
 
         body: (req, data) => {
@@ -13,32 +17,77 @@ module.exports = (model) => {
             for(let property in model.columns){
                 returnObject[property] = req.body[property];
             }
-            return returnObject;
+            return {
+                value: returnObject
+            }
         },
 
         query_param_id: (req, data) => {
-            console.log("QUERY PARAM ID", req.query)
-            return req.query[model.name_id];
+            if(req.query[model.name_id] === undefined){
+                return {
+                    error: model.name_id
+                }
+            }
+            return {
+                value: req.query[model.name_id]
+            }
         },
-        
+
         query_param_data: (req, data) => {
-            return {[data]: req.query[data]};
+            if(req.query[data] === undefined){
+                return {
+                    error: data
+                }
+            }
+            return {
+                value: {[data]: req.query[data]}
+            }
+        },
+
+        query_param_value: (req, data) => {
+            if(req.query[data] === undefined){
+                return {
+                    error: data
+                }
+            }
+            return {
+                value: req.query[data]
+            }
+        },
+
+        query_param_value_parse_int: (req, data) => {
+            if(req.query[data] === undefined){
+                return {
+                    error: data
+                }
+            }
+            return {
+                value: parseInt(req.query[data])
+            }
         },
 
         param_id: (req, data) => {
-            return req.params[model.name_id];
+            return {
+                value: req.params[model.name_id]
+            }
         },
 
         param_data: (req, data) => {
-            return {[data]: req.params[data]};
+            return {
+                value: {[data]: req.params[data]}
+            }
         },
 
         param_value: (req, data) => {
-            return req.params[data];
+            return {
+                value: req.params[data]
+            }
         },
 
         param_value_parse_int: (req, data) => {
-            return parseInt(req.params[data]);
+            return {
+                value: parseInt(req.params[data])
+            }
         }
     }
 }

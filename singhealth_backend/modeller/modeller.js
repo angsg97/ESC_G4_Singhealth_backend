@@ -134,6 +134,8 @@ const QueryCollection = function(data, routes){
 
         let paramArray = [];
         let paramArrayData = [];
+        let paramArrayMissing = [];
+
 
         for(var i = 0; i<queryModel.param.length; i++){
 
@@ -146,10 +148,23 @@ const QueryCollection = function(data, routes){
                 });
                 return;
             }
+            let paramValue = this.paramMap[paramName](req, paramData);
+            if(paramValue.error){
+                paramArrayMissing.push(paramValue.error);
+            }
+            else{
+                paramArrayData.push(paramData);
+                paramArray.push(paramValue.value);
+            }
 
-            paramArrayData.push(paramData);
-            paramArray.push(this.paramMap[paramName](req, paramData));
+        }
 
+        if(paramArrayMissing.length){
+            result({
+                kind: "incomplete_query_param",
+                missing: paramArrayMissing
+            });
+            return;
         }
 
         console.log(queryString, paramArray);
