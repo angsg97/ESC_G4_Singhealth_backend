@@ -110,6 +110,26 @@ test("Test Create Duplicate Admin", async () => {
 });
 
 /*
+TESTS FOR INVALID EMAIL IN USER CREATION
+*/
+const testInvalidEmailUserCreate = async (route) => {
+  const res = await request.post(route).send({
+    email: "Not an Email",
+    password: "Some Password",
+  });
+
+  // Check for response code of 400
+  expect(res.status).toBe(400);
+  expect(res.body.message).toBe("Invalid Email Format");
+};
+
+test("Test Create Duplicate Admin", async () => {
+  // Both tenant and admin signup APIs should prevent invalid emails
+  await testInvalidEmailUserCreate("/auth/tenant_signup");
+  await testInvalidEmailUserCreate("/auth/admin_signup");
+});
+
+/*
 TESTS FOR USER LOGIN
 isAdmin indicates whether we are testing for Admin login or not
 */
