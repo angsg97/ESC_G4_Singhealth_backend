@@ -6,6 +6,14 @@ module.exports = (app, passport) => {
   const auth = passport.authenticate("jwt", { session: false });
   const admin_auth = passport.authenticate("jwt_admin", { session: false });
 
+  const staffRoutes = new Routes(app, auth, admin_auth, "staff");
+  const tenantRoutes = new Routes(app, auth, admin_auth, "tenant");
+  const auditRoutes = new Routes(app, auth, admin_auth, "audit");
+  const issueRoutes = new Routes(app, auth, admin_auth, "issue");
+  const messageRoutes = new Routes(app, auth, admin_auth, "message");
+
+
+  /*
   app.use(
     `/api/staff`,
     auth,
@@ -31,6 +39,8 @@ module.exports = (app, passport) => {
     auth,
     new Routes("message").router
   );
+*/
+
   app.use(
     `/api/image`,
     auth,

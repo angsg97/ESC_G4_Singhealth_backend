@@ -33,6 +33,7 @@ const Staff = new QueryCollection(
         query: "insert_set_body",
         param: [{body: null}],
         result: ["insert_id", "body"],
+        admin: true
 
     },
 
@@ -92,6 +93,7 @@ const Staff = new QueryCollection(
       query: "remove_from_param_id",
       param: [{ query_param_id: null }],
       result: [{ message: "successfully deleted" }, "query_id"],
+      admin: true
     },
 
     remove_staff_by_staff_id: {
@@ -99,6 +101,7 @@ const Staff = new QueryCollection(
       query: "remove_from_param_id",
       param: [{ param_id: null }],
       result: [{ message: "successfully deleted" }, "param"],
+      admin: true
     },
   }
 );

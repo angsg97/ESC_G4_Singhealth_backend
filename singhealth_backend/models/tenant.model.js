@@ -56,6 +56,7 @@ const Tenant = new QueryCollection(
       query: "insert_set_body",
       param: [{ body: null }],
       result: ["insert_id", "body"],
+      admin: true
     },
 
     find_all_tenant: {
@@ -112,6 +113,7 @@ const Tenant = new QueryCollection(
       query: "remove_from_param_id",
       param: [{ query_param_id: null }],
       result: [{ message: "successfully deleted" }, "query_id"],
+      admin: true
     },
 
     remove_tenant_by_tenant_id: {
@@ -119,6 +121,7 @@ const Tenant = new QueryCollection(
       query: "remove_from_param_id",
       param: [{ param_id: null }],
       result: [{ message: "successfully deleted" }, "param"],
+      admin: true
     },
   }
 );
