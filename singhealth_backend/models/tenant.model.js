@@ -2,47 +2,7 @@ const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "tenant";
 const ID = `${TABLE}_id`;
-const COLUMNS = {
-    name: {
-        required: true,
-        type: "plain text"
-    },
-    phone: {
-        required: true,
-        type: "phone"
-    },
-    email: {
-        required: true,
-        type: "email"
-    },
-    institution: {
-        required: true,
-        type: "plain text"
-    },
-    fnb: {
-        required: false,
-        default: false,
-        type: "boolean"
-    },
-    unit: {
-        required: true,
-        type: "unit"
-    },
-    image_logo: {
-        required: false,
-        default: "",
-        type: "url"
-    },
-    image_location: {
-        required: false,
-        default: "",
-        type: "url"
-    },
-    contract_date: {
-        required: true,
-        type: "timestamp"
-    }
-};
+const COLUMNS = require("../model_columns/tenant.columns");
 
 const Tenant = new QueryCollection(
   {

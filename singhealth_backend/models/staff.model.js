@@ -2,24 +2,7 @@ const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "staff";
 const ID = `${TABLE}_id`;
-const COLUMNS = {
-    name: {
-        required: true,
-        type: "plain text"
-    },
-    phone: {
-        required: true,
-        type: "phone"
-    },
-    email: {
-        required: true,
-        type: "email"
-    },
-    institution: {
-        required: true,
-        type: "plain text"
-    }
-};
+const COLUMNS = require("../model_columns/staff.columns");
 
 const Staff = new QueryCollection(
   {

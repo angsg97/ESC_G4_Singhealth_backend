@@ -2,35 +2,7 @@ const QueryCollection = require("../modeller/modeller.js");
 
 const TABLE = "audit";
 const ID = `${TABLE}_id`;
-const COLUMNS = {
-
-    staff_id: {
-        required: true,
-        type: "id"
-    },
-    tenant_id: {
-        required: true,
-        type: "id"
-    },
-    time: {
-        required: false,
-        default: "Date.now()",
-        type: "timestamp"
-    },
-    score: {
-        required: true,
-        type: "number"
-    },
-    type: {
-        required: true,
-        type: "plain text"
-    },
-    all_resolved: {
-        required: false,
-        default: false,
-        type: "boolean"
-    }
-};
+const COLUMNS = require("../model_columns/audit.columns");
 
 const Audit = new QueryCollection(
   {
