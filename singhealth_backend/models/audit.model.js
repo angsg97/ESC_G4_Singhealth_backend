@@ -24,6 +24,11 @@ const COLUMNS = {
     type: {
         required: true,
         type: "plain text"
+    },
+    all_resolved: {
+        required: false,
+        default: false,
+        type: "boolean"
     }
 };
 
