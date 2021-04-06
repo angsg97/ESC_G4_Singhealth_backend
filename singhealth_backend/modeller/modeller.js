@@ -222,6 +222,9 @@ const QueryCollection = function(data, routes){
                 }
             }
 
+            if(queryModel.hasOwnProperty("post_result")){
+                resultObject = queryModel.post_result(resultObject);
+            }
 
             //call the model result return function
             result(null, resultObject);

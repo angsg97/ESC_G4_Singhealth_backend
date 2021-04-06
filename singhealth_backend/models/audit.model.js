@@ -33,7 +33,7 @@ const Audit = new QueryCollection(
           { data: "audit.tenant_id" },
           { data: "tenant.tenant_id" }
       ],
-      result: ["result_full"],
+      result: ["result_full_split_audit_tenant"]
     },
 
     find_all_audits_append_staff_data: {
@@ -44,7 +44,7 @@ const Audit = new QueryCollection(
           { data: "audit.staff_id" },
           { data: "staff.staff_id" }
       ],
-      result: ["result_full"],
+      result: ["result_full_split_audit_staff"],
     },
 
     find_audit_by_audit_id_param: {
