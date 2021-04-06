@@ -48,6 +48,28 @@ const Audit = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_all_audits_append_tenant_data: {
+      path: "GET /append_tenant_data",
+      query: "select_all_join_table",
+      param: [
+          { data: "tenant" },
+          { data: "audit.tenant_id" },
+          { data: "tenant.tenant_id" }
+      ],
+      result: ["result_full"],
+    },
+
+    find_all_audits_append_staff_data: {
+      path: "GET /append_staff_data",
+      query: "select_all_join_table",
+      param: [
+          { data: "staff" },
+          { data: "audit.staff_id" },
+          { data: "staff.staff_id" }
+      ],
+      result: ["result_full"],
+    },
+
     find_audit_by_audit_id_param: {
       path: `GET /${ID}_param`,
       query: "select_from_param_id",

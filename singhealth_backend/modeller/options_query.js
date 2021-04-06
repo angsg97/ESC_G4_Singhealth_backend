@@ -10,6 +10,12 @@ module.exports = (model) => {
             check: []
         },
 
+        select_all_join_table: {
+            //SELECT * FROM audit a join tenant t on a.tenant_id = t.tenant_id;
+            query: `SELECT * FROM ${model.name} join ?? on ?? = ??`,
+            check: []
+        },
+
         select_from_param_id: {
             query: `SELECT * FROM ${model.name} WHERE ${model.name_id} = ?`,
             check: ["param_id_not_found"]
