@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "951c5421-e67c-47ab-866c-eb65fef78dd9",
+		"_postman_id": "7cff818d-33b1-44c4-8b60-426a3df3af0c",
 		"name": "singhealthdb",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -152,7 +152,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/staff/institution_param?secret_token={{token}}&institution=ABC",
+							"raw": "{{base_url}}/api/staff/institution_param?secret_token={{token}}&institution=ABC&",
 							"host": [
 								"{{base_url}}"
 							],
@@ -169,6 +169,10 @@
 								{
 									"key": "institution",
 									"value": "ABC"
+								},
+								{
+									"key": "",
+									"value": null
 								}
 							]
 						}
@@ -761,6 +765,80 @@
 								"api",
 								"audit",
 								""
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Audit Get All Append Tenant",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/append_tenant_data?secret_token={{token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"append_tenant_data"
+							],
+							"query": [
+								{
+									"key": "secret_token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Audit Get All Append Staff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/audit/append_staff_data?secret_token={{token}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"audit",
+								"append_staff_data"
 							],
 							"query": [
 								{
@@ -2188,12 +2266,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/auth/signup",
+							"raw": "{{base_url}}/signup",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"auth",
 								"signup"
 							]
 						},
@@ -2222,12 +2299,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/auth/admin_signup",
+							"raw": "{{base_url}}/admin_signup",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"auth",
 								"admin_signup"
 							]
 						}
@@ -2255,69 +2331,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/auth/login",
+							"raw": "{{base_url}}/login",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"auth",
 								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Tenant",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "exampletesting123@example.com",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{base_url}}/auth/tenant_delete",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"auth",
-								"tenant_delete"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Tenant Copy",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "email",
-									"value": "exampletesting123@example.com",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{base_url}}/auth/admin_delete",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"auth",
-								"admin_delete"
 							]
 						}
 					},
@@ -2440,11 +2459,16 @@
 		},
 		{
 			"key": "base_url",
-			"value": "localhost:8080"
+			"value": "localhost:8080",
+			"disabled": true
 		},
 		{
 			"key": "token",
 			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNTYxNDc4NGM1YThhNTdlODQ0OWNlNyIsImVtYWlsIjoiZXhhbXBsZXRlc3RpbmcxMjNAZXhhbXBsZS5jb20ifSwiaWF0IjoxNjE2MjkxNjI4fQ.PME4hB2mzHEQjgP2OkSpTUBbisw2frn_Twt6B6YkYaw"
+		},
+		{
+			"key": "token_admin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYwNWM1OWRjN2FjMzQ2NDEwYTYzOTE2NCIsImVtYWlsIjoiYWRtaW5AdGVzdC5jb20ifSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjE3NzYyNTI3fQ.Mo_SvrePcOPhvipHRBQDh2CxSK5UBP9cjvXfgWn-APs"
 		}
 	]
 }
