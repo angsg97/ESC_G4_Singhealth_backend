@@ -3,7 +3,7 @@ var express = require('express');
 //require the general controller
 const Controller = require("../controllers/general.controller.js");
 
-const Routes = function(app, auth, admin_auth, modelName){
+const Routes = function(app, passport, modelName){
 
     //initialize a router for these routes, bound to this object
 
@@ -12,7 +12,7 @@ const Routes = function(app, auth, admin_auth, modelName){
 
     //get the names of the routes to defined from the keys of the model routes
     let routes = Object.keys(model.routes);
-
+    
     //iterate through all the routes so that we can define them
     for(var i = 0; i<routes.length; i++){
 
@@ -39,9 +39,13 @@ const Routes = function(app, auth, admin_auth, modelName){
         }
 
 
+        let authType = useAdmin? "jwt_admin": "jwt";
+        let auth = passport.authenticate(authType, { session: false });
+
+        console.log(type, path, useAdmin)
         app.use(
           `/api/${modelName}`,
-          useAdmin? admin_auth: auth,
+          auth,
           router
         );
 

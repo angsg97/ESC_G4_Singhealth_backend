@@ -11,13 +11,7 @@ const Tenant = new QueryCollection(
     columns: COLUMNS,
   },
   {
-    create_tenant: {
-      path: "POST /",
-      query: "insert_set_body",
-      param: [{ body: null }],
-      result: ["insert_id", "body"],
-      admin: true
-    },
+
 
     find_all_tenant: {
       path: "GET /",
@@ -83,6 +77,15 @@ const Tenant = new QueryCollection(
       result: [{ message: "successfully deleted" }, "param"],
       admin: true
     },
+
+    create_tenant: {
+      path: "POST /",
+      query: "insert_set_body",
+      param: [{ body: null }],
+      result: ["insert_id", "body"],
+      admin: true
+    },
+
   }
 );
 

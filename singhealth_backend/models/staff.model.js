@@ -11,14 +11,7 @@ const Staff = new QueryCollection(
     columns: COLUMNS,
   },
   {
-    create_staff: {
-        path: "POST /",
-        query: "insert_set_body",
-        param: [{body: null}],
-        result: ["insert_id", "body"],
-        admin: true
 
-    },
 
     find_all_staff: {
       path: "GET /",
@@ -86,6 +79,16 @@ const Staff = new QueryCollection(
       result: [{ message: "successfully deleted" }, "param"],
       admin: true
     },
+
+    create_staff: {
+        path: "POST /",
+        query: "insert_set_body",
+        param: [{body: null}],
+        result: ["insert_id", "body"],
+        admin: true
+
+    },
+
   }
 );
 
