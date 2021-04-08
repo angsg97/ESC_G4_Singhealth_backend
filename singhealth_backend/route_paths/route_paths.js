@@ -3,7 +3,7 @@ const Routes = require("../routes/general.routes");
 
 //create new routes for each of the path
 module.exports = (app, passport) => {
-    
+
   const auth = passport.authenticate("jwt", { session: false });
   const admin_auth = passport.authenticate("jwt_admin", { session: false });
 

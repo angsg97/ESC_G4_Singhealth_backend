@@ -34,6 +34,13 @@ const Staff = new QueryCollection(
       result: ["result_full"],
     },
 
+    find_staff_by_staff_email_param: {
+      path: `GET /email_param`,
+      query: "select_from_param_data",
+      param: [{ query_param_data: "email" }],
+      result: ["result_full"],
+    },
+
     find_staff_by_staff_id: {
       path: `GET /:${ID}`,
       query: "select_from_param_id",
@@ -46,6 +53,13 @@ const Staff = new QueryCollection(
       path: `GET /institution/:institution`,
       query: "select_from_param_data",
       param: [{ param_data: "institution" }],
+      result: ["result_full"],
+    },
+
+    find_staff_by_email: {
+      path: `GET /email/:email`,
+      query: "select_from_param_data",
+      param: [{ param_data: "email" }],
       result: ["result_full"],
     },
 
