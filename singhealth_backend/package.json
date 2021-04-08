@@ -22,6 +22,7 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.1",
+    "express-validator": "^6.10.0",
     "firebase": "^8.3.1",
     "http-errors": "~1.6.3",
     "jade": "^0.29.0",

@@ -5,6 +5,8 @@ const { TenantModel, AdminModel } = require("./auth.model");
 const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 
+const { check } = require('express-validator/check')
+
 const messages = {
   INVALID_EMAIL_FORMAT: "Invalid Email Format",
   EMAIL_ALR_EXISTS: "Email already exists in Database",
@@ -180,6 +182,15 @@ const authController = {
       }
     })(req, res, next);
   },
+
+  validateEmailAndPassword: [
+    check('email').trim().isEmail().normalizeEmail(),
+    check('password').not().isEmpty().trim().escape()
+  ],
+
+  validateEmail: [
+    check('email').trim().isEmail().normalizeEmail()
+  ]
 };
 
 // Login middleware to authenticate user
