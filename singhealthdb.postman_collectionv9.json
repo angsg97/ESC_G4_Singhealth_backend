@@ -2430,11 +2430,6 @@
 									"key": "email",
 									"value": "exampletesting123456test@example.com",
 									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "text"
 								}
 							]
 						},
@@ -2463,11 +2458,6 @@
 								{
 									"key": "email",
 									"value": "exampletesting123456test@example.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "password",
 									"type": "text"
 								}
 							]
@@ -2665,12 +2655,12 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://singhealthdb.herokuapp.com",
-			"disabled": true
+			"value": "http://singhealthdb.herokuapp.com"
 		},
 		{
 			"key": "base_url",
-			"value": "localhost:8080"
+			"value": "localhost:8080",
+			"disabled": true
 		},
 		{
 			"key": "token",
