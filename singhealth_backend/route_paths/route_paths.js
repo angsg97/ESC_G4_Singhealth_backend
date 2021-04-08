@@ -14,7 +14,6 @@ module.exports = (app, passport) => {
   const messageRoutes = new Routes(app, passport, "message");
 
 
-
   app.use(
     `/api/image`,
     auth,
