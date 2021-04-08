@@ -1,4 +1,5 @@
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const localStrategy = require("passport-local").Strategy;
 const { TenantModel, AdminModel } = require("./auth.model");
 const JWTstrategy = require("passport-jwt").Strategy;
@@ -115,15 +116,12 @@ const authController = {
         return res.status(400).json({ message: messages.EMAIL_NOT_EXIST });
       }
 
-      await TenantModel.deleteOne(
-        {
-          email: email,
-        },
-      );
+      await TenantModel.deleteOne({
+        email: email,
+      });
 
       console.log(messages.DELETE_SUCCESS);
       return res.json({ message: messages.DELETE_SUCCESS });
-
     } catch (err) {
       next(err);
     }
@@ -139,19 +137,49 @@ const authController = {
         return res.status(400).json({ message: messages.EMAIL_NOT_EXIST });
       }
 
-      await AdminModel.deleteOne(
-        {
-          email: email,
-        },
-      );
+      await AdminModel.deleteOne({
+        email: email,
+      });
 
       console.log(messages.DELETE_SUCCESS);
       return res.json({ message: messages.DELETE_SUCCESS });
-
     } catch (err) {
       next(err);
     }
-  }
+  },
+
+  async login(req, res, next) {
+    passport.authenticate("login", async (err, user, info) => {
+      try {
+        if (err) {
+          return next(err);
+        }
+
+        if (!user) {
+          return res.status(404).json(info);
+        }
+
+        req.login(user, { session: false }, async (error) => {
+          if (error) return next(error);
+
+          console.log(info.message);
+
+          const body = { _id: user._id, email: user.email };
+          const token = jwt.sign(
+            {
+              user: body,
+              isAdmin: info.isAdmin,
+            },
+            process.env.JWT_SECRET_KEY
+          );
+
+          return res.json({ token, isAdmin: info.isAdmin });
+        });
+      } catch (err) {
+        return next(err);
+      }
+    })(req, res, next);
+  },
 };
 
 // Login middleware to authenticate user
