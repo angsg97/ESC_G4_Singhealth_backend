@@ -83,6 +83,14 @@ module.exports = (value, type) => {
             }
             break;
 
+        case "number":
+            let i = parseInt(value);
+            if(isNaN(i)){
+                return true;
+            }
+
+            break;
+
         case "any text":
             if(typeof(value)!=="string"){
                 return true;

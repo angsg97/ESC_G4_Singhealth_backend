@@ -165,8 +165,9 @@ const QueryCollection = function(data, routes){
             return;
         }
 
-        console.log(queryString, paramArray);
-        console.log(mysql.format(queryString, paramArray));
+        //console.log(queryString, paramArray);
+        //console.log(mysql.format(queryString, paramArray));
+        
         //sql query with the model query and parameters
         connection.query(queryString, paramArray, (err, res) => {
 

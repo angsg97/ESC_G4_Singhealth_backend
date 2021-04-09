@@ -5,7 +5,7 @@ const { TenantModel, AdminModel } = require("./auth.model");
 const JWTstrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 
-const { check } = require('express-validator/check')
+const { check } = require('express-validator')
 
 const messages = {
   INVALID_EMAIL_FORMAT: "Invalid Email Format",
