@@ -174,8 +174,8 @@ test("Create message", async () => {
 
 
 //run through all update test cases
-for(let testName of Object.keys(issueTest)){
-    let testUpdate = issueTest[testName];
+for(let testName of Object.keys(messageTest)){
+    let testUpdate = messageTest[testName];
     test(`Update message: ${testName}`, async () => {
         let resTest = await request.put(
             routeCreator(
