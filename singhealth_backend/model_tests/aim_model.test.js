@@ -23,7 +23,7 @@ function routeCreator(route, params, admin){
 
 
 
-const staffTest = require("./staff_update.model");
+const staffTest = require("../model_updates/staff_update.model");
 var staffId = undefined;
 
 test("Create staff with admin token", async () => {
@@ -43,7 +43,7 @@ test("Create staff with admin token", async () => {
 });
 
 
-const tenantTest = require("./tenant_update.model");
+const tenantTest = require("../model_updates/tenant_update.model");
 var tenantId = undefined;
 
 test("Create tenant with admin token", async () => {
@@ -67,7 +67,7 @@ test("Create tenant with admin token", async () => {
 
 
 
-const auditTest = require("./audit_update.model");
+const auditTest = require("../model_updates/audit_update.model");
 var auditId = undefined;
 test("Create audit", async () => {
     //create new tenant with admin token
@@ -111,7 +111,7 @@ for(let testName of Object.keys(auditTest)){
 
 
 
-const issueTest = require("./issue_update.model");
+const issueTest = require("../model_updates/issue_update.model");
 var issueId = undefined;
 test("Create Issue", async () => {
     //create new tenant with admin token
@@ -151,7 +151,7 @@ for(let testName of Object.keys(issueTest)){
 
 
 
-const messageTest = require("./message_update.model");
+const messageTest = require("../model_updates/message_update.model");
 var messageId = undefined;
 test("Create message", async () => {
     //create new tenant with admin token
@@ -200,7 +200,7 @@ test(`Delete message`, async () => {
     //delete with admin
     let res = await request.delete(
         routeCreator(
-            "message/message_issue_param",
+            "message/message_id_param",
             {message_id: messageId}
         )
     );

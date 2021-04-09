@@ -22,7 +22,7 @@ function routeCreator(route, params, admin){
 }
 
 
-const tenantTest = require("./tenant_update.model");
+const tenantTest = require("../model_updates/tenant_update.model");
 
 test("Create tenant without admin", async () => {
     //create new tenant with wrong token

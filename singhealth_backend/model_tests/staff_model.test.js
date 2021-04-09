@@ -22,7 +22,7 @@ function routeCreator(route, params, admin){
 }
 
 
-const staffTest = require("./staff_update.model");
+const staffTest = require("../model_updates/staff_update.model");
 
 test("Create staff without admin", async () => {
     //create new staff with wrong token
