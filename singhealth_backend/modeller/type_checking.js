@@ -74,7 +74,7 @@ module.exports = (value, type) => {
             if(typeof(value)!=="string"){
                 return true;
             }
-            if(!(/^[a-zA-Z0-9\s]*$/.test(value))){
+            if(!(/^[a-zA-Z0-9&-:\s]*$/.test(value))){
                 return true;
             }
             break;
