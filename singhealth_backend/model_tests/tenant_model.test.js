@@ -1,28 +1,14 @@
-const app = require("../app"); // Link to your app
-const supertest = require("supertest");
-const request = supertest(app);
-const mysql = require('mysql');
-
-/*
-TESTS FOR USER CREATION
-*/
-
-function routeCreator(route, params, admin){
-    let returnString = `/api/${route}?`;
-    if(params){
-        for(let property of Object.keys(params)){
-            returnString+=`${property}=${params[property]}&`;
-        }
-    }
-    let token = process.env[admin?
-        "TESTING_TOKEN_ADMIN":
-        "TESTING_TOKEN_NORMAL"];
-    returnString +=`secret_token=${token}`;
-    return returnString;
-}
-
+const {
+    app,
+    supertest,
+    request,
+    mysql,
+    routeCreator
+} = require("./test_helper.js");
 
 const tenantTest = require("../model_updates/tenant_update.model");
+var tenantDefault = {};
+
 
 test("Create tenant without admin", async () => {
     //create new tenant with wrong token
@@ -32,9 +18,7 @@ test("Create tenant without admin", async () => {
     expect(res.status).toBe(401);
 });
 
-var tenantId = undefined;
-
-test("Create tenant with admin token", async () => {
+test("Create tenant with admin", async () => {
     //create new tenant with admin token
     let res = await request.post(
         routeCreator(
@@ -47,9 +31,11 @@ test("Create tenant with admin token", async () => {
 
     //extract tenant_id
     expect(res.body.tenant_id).toBeTruthy();
-    tenantId = res.body.tenant_id;
+    tenantDefault = res.body;
 });
 
+
+///////////////////FULL FUNCTIONS TESTS///////////////////
 
 test(`Check if tenant exists`, async () => {
 
@@ -57,7 +43,7 @@ test(`Check if tenant exists`, async () => {
     let res = await request.get(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId}
+            {tenant_id: tenantDefault.tenant_id}
         )
     );
     expect(res.status).toBe(200);
@@ -73,7 +59,7 @@ for(let testName of Object.keys(tenantTest)){
         let resTest = await request.put(
             routeCreator(
                 "tenant/tenant_id_param",
-                {tenant_id: tenantId}
+                {tenant_id: tenantDefault.tenant_id}
             ))
             .send(testUpdate.body);
         expect(resTest.status).toBe(testUpdate.status);
@@ -89,7 +75,7 @@ test(`Delete tenant without admin`, async () => {
     let res = await request.delete(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId}
+            {tenant_id: tenantDefault.tenant_id}
         )
     );
     expect(res.status).toBe(401);
@@ -101,7 +87,7 @@ test(`Check if tenant exists after failed delete`, async () => {
     let res = await request.get(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId}
+            {tenant_id: tenantDefault.tenant_id}
         )
     );
     expect(res.status).toBe(200);
@@ -115,7 +101,7 @@ test(`Delete tenant with admin`, async () => {
     let res = await request.delete(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId},
+            {tenant_id: tenantDefault.tenant_id},
             true
         )
     );
@@ -129,7 +115,7 @@ test(`Check if tenant exists after successful delete`, async () => {
     let res = await request.get(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId}
+            {tenant_id: tenantDefault.tenant_id}
         )
     );
     expect(res.status).toBe(404);
@@ -141,7 +127,7 @@ test(`Check if random tenant exists`, async () => {
     let res = await request.get(
         routeCreator(
             "tenant/tenant_id_param",
-            {tenant_id: tenantId+1}
+            {tenant_id: tenantDefault.tenant_id+1}
         )
     );
     expect(res.status).toBe(404);

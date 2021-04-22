@@ -23,6 +23,18 @@ module.exports = {
             contract_date: 1615958538774
         }
     },
+    number_fnb1: {
+        status: 200,
+        body: {
+            name: "Starbucks",
+            phone: "26453726",
+            email: "starbucks@starbucks.com",
+            institution: "ABC",
+            fnb: 1,
+            unit: "05-35",
+            contract_date: 1615958538774
+        }
+    },
     invalid_fnb1: {
         status: 400,
         body: {
@@ -35,31 +47,7 @@ module.exports = {
             contract_date: 1615958538774
         }
     },
-    invalid_fnb2: {
-        status: 400,
-        body: {
-            name: "Starbucks",
-            phone: "26453726",
-            email: "starbucks@starbucks.com",
-            institution: "ABC",
-            fnb: 1,
-            unit: "05-35",
-            contract_date: 1615958538774
-        }
-    },
     invalid_unit1: {
-        status: 400,
-        body: {
-            name: "Starbucks",
-            phone: "26453726",
-            email: "starbucks@starbucks.com",
-            institution: "ABC",
-            fnb: 1,
-            unit: "05-35",
-            contract_date: 1615958538774
-        }
-    },
-    invalid_unit2: {
         status: 400,
         body: {
             name: "Starbucks",
@@ -71,7 +59,7 @@ module.exports = {
             contract_date: 1615958538774
         }
     },
-    invalid_unit3: {
+    invalid_unit2: {
         status: 400,
         body: {
             name: "Starbucks",
@@ -83,7 +71,7 @@ module.exports = {
             contract_date: 1615958538774
         }
     },
-    invalid_unit4: {
+    invalid_unit3: {
         status: 400,
         body: {
             name: "Starbucks",
@@ -95,8 +83,8 @@ module.exports = {
             contract_date: 1615958538774
         }
     },
-    invalid_unit5: {
-        status: 400,
+    valid_unit1: {
+        status: 200,
         body: {
             name: "Starbucks",
             phone: "26453726",

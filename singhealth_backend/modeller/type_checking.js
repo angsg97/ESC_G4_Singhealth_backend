@@ -54,6 +54,7 @@ module.exports = (value, type) => {
         case "boolean":
             if(value === "true" || value === "false"){}
             else if(value === true || value === false){}
+            else if(value === 0 || value === 1){}
             else{
                 return true;
             }
@@ -74,7 +75,7 @@ module.exports = (value, type) => {
             if(typeof(value)!=="string"){
                 return true;
             }
-            if(!(/^[a-zA-Z0-9&-:\s]*$/.test(value))){
+            if(!(/^[a-zA-Z0-9&\-:\s]*$/.test(value))){
                 return true;
             }
             break;

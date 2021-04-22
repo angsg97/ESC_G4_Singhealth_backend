@@ -8,10 +8,46 @@ module.exports = {
             institution: "ABC"
         }
     },
-    invalid_name1:{
-        status: 400,
+    valid_name1:{
+        status: 200,
         body: {
             name: "George123",
+            phone: "26453726",
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
+    valid_name2: {
+        status: 200,
+        body: {
+            name: "George & the Jungle",
+            phone: "26453726",
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
+    valid_name3: {
+        status: 200,
+        body: {
+            name: "George - the better one",
+            phone: "26453726",
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
+    valid_name4: {
+        status: 200,
+        body: {
+            name: "George - the better one",
+            phone: "26453726",
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
+    invalid_name1: {
+        status: 400,
+        body: {
+            name: "George.",
             phone: "26453726",
             email: "george@gmail.com",
             institution: "ABC"
@@ -20,7 +56,16 @@ module.exports = {
     invalid_name2: {
         status: 400,
         body: {
-            name: "George.",
+            name: "George?",
+            phone: "26453726",
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
+    invalid_name3: {
+        status: 400,
+        body: {
+            name: 1234,
             phone: "26453726",
             email: "george@gmail.com",
             institution: "ABC"
@@ -62,6 +107,15 @@ module.exports = {
             institution: "ABC"
         }
     },
+    invalid_number4: {
+        status: 400,
+        body: {
+            name: "George",
+            phone: 12345678,
+            email: "george@gmail.com",
+            institution: "ABC"
+        }
+    },
     invalid_email1: {
         status: 400,
         body: {
@@ -95,6 +149,15 @@ module.exports = {
             name: "George",
             phone: "2645372612",
             email: "@gmail.com",
+            institution: "ABC"
+        }
+    },
+    invalid_email5: {
+        status: 400,
+        body: {
+            name: "George",
+            phone: "2645372612",
+            email: true,
             institution: "ABC"
         }
     },

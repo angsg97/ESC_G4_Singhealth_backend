@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "devstart": "nodemon ./bin/www",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "test:watch": "jest --watch"
   },
   "dependencies": {

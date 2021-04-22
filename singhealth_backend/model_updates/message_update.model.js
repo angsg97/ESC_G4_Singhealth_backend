@@ -13,4 +13,29 @@ module.exports = {
         }
     },
 
+    invalid_url1: {
+        status: 400,
+        body: {
+            image: "lol what is this"
+        }
+    },
+    invalid_url2: {
+        status: 400,
+        body: {
+            image: 123
+        }
+    },
+    valid_url1: {
+        status: 200,
+        body: {
+            image: "https://google.com"
+        }
+    },
+    invalid_text1: {
+        status: 400,
+        body: {
+            body: 123
+        }
+    },
+
 }
