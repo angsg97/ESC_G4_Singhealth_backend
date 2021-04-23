@@ -13,6 +13,7 @@ module.exports = (app, passport) => {
   const issueRoutes = new Routes(app, passport, "issue");
   const messageRoutes = new Routes(app, passport, "message");
 
+
   if(process.env.NODE_ENV === "test"){
       const testRoutes = new Routes(app, passport, "test");
       console.log("creating test routes");
