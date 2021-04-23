@@ -36,10 +36,6 @@ const isValidPassword = async function(password) {
 
 // Pre-Hook to convert plain-text password to hash before storage
 const hash_password = async function(next) {
-  const user = this;
-  if (this.password === undefined) {
-    next(new Error('Password field is empty'));
-  }
 
   try {
     const hash = await bcrypt.hash(this.password, 10);

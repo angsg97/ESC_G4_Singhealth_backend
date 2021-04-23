@@ -123,7 +123,7 @@ const testInvalidEmailUserCreate = async (route) => {
   expect(res.body.message).toBe("Invalid Email Format");
 };
 
-test("Test Create Duplicate Admin", async () => {
+test("Test Create Invalid Email", async () => {
   // Both tenant and admin signup APIs should prevent invalid emails
   await testInvalidEmailUserCreate("/auth/tenant_signup");
   await testInvalidEmailUserCreate("/auth/admin_signup");
