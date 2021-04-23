@@ -54,6 +54,7 @@ module.exports = (value, type) => {
         case "boolean":
             if(value === "true" || value === "false"){}
             else if(value === true || value === false){}
+            else if(value === 0 || value === 1){}
             else{
                 return true;
             }
@@ -64,12 +65,8 @@ module.exports = (value, type) => {
             if(typeof(value)!=="string"){
                 return true;
             }
-            var split = value.split("-");
-            if(split.length != 2){
-                return true;
-            }
-
-            if(split[0].match(/^[0-9]+$/) == null || split[1].match(/^[0-9]+$/) == null){
+            var split = value.indexOf("-");
+            if(split == -1){
                 return true;
             }
             break;
@@ -78,9 +75,17 @@ module.exports = (value, type) => {
             if(typeof(value)!=="string"){
                 return true;
             }
-            if(!(/^[a-zA-Z\s]*$/.test(value))){
+            if(!(/^[a-zA-Z0-9&\-:\s]*$/.test(value))){
                 return true;
             }
+            break;
+
+        case "number":
+            let i = parseInt(value);
+            if(isNaN(i)){
+                return true;
+            }
+
             break;
 
         case "any text":
