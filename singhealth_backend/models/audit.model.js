@@ -58,14 +58,14 @@ const Audit = new QueryCollection(
       path: `GET /staff_id_param`,
       query: "select_from_param_data",
       param: [{ query_param_data: "staff_id" }],
-      result: ["result_first"],
+      result: ["result_full"],
     },
 
     find_audit_by_tenant_id_param: {
       path: `GET /tenant_id_param`,
       query: "select_from_param_data",
       param: [{ query_param_data: "tenant_id" }],
-      result: ["result_first"],
+      result: ["result_full"],
     },
 
     find_audit_by_greater_than_time_param: {

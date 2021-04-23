@@ -44,6 +44,9 @@ module.exports = (model) => {
             }
         },
 
+        /*
+        this type of option is never used
+        but its here in case it becomes useful in the future
         query_param_value: (req, data) => {
             if(req.query[data] === undefined){
                 return {
@@ -54,6 +57,7 @@ module.exports = (model) => {
                 value: req.query[data]
             }
         },
+        */
 
         query_param_value_parse_int: (req, data) => {
             if(req.query[data] === undefined){
@@ -78,11 +82,15 @@ module.exports = (model) => {
             }
         },
 
+        /*
+        this type of option is never used
+        but its here in case it becomes useful in the future
         param_value: (req, data) => {
             return {
                 value: req.params[data]
             }
         },
+        */
 
         param_value_parse_int: (req, data) => {
             return {
