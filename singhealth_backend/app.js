@@ -15,7 +15,7 @@ var session = require("express-session");
 var passport = require("passport");
 var logger = require("morgan");
 var fileUpload = require("express-fileupload");
-
+var RateLimit = require('express-rate-limit');
 var mongoose = require("mongoose");
 
 // Set up MongoDB using credentials if not testing
@@ -48,6 +48,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+
+
+
+//rate limiter
+app.enable('trust proxy');
+var limiter = new RateLimit({
+  windowMs: 15*60*1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  delayMs: 0 // disable delaying - full speed until the max limit is reached
+});
+app.use(limiter);
+
+
 
 // parse requests of content-type: file
 app.use(fileUpload());
